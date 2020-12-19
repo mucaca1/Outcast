@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour {
+namespace Outcast.Core {
+    public class CameraFollow : MonoBehaviour {
 
-    [SerializeField] private Transform target;
-    void LateUpdate() {
-        transform.position = target.position;
+        [SerializeField] private Transform target;
+        void LateUpdate() {
+            transform.position = target.position;
+        }
     }
 }
