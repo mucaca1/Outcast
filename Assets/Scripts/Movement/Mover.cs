@@ -1,10 +1,10 @@
 using System;
-using Outcast.Combat;
+using Outcast.Core;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Outcast.Movement {
-    public class Mover : MonoBehaviour {
+    public class Mover : MonoBehaviour, IAction {
         private NavMeshAgent navMeshAgent;
 
         private void Start() {
@@ -22,18 +22,18 @@ namespace Outcast.Movement {
             GetComponent<Animator>().SetFloat("fowardSpeed", speed);
         }
 
-        public void Stop() {
-            navMeshAgent.isStopped = true;
-        }
-
         public void StartMoveAction(Vector3 destination) {
-            GetComponent<Fighter>().Cancel();
+            GetComponent<ActionScheduler>().StartAction(this);
             MoveTo(destination);
         }
 
         public void MoveTo(Vector3 destination) {
             navMeshAgent.destination = destination;
             navMeshAgent.isStopped = false;
+        }
+
+        public void Cancel() {
+            navMeshAgent.isStopped = true;
         }
     }
 }
