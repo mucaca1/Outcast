@@ -6,12 +6,15 @@ using UnityEngine.AI;
 namespace Outcast.Movement {
     public class Mover : MonoBehaviour, IAction {
         private NavMeshAgent navMeshAgent;
+        private Health _health;
 
         private void Start() {
             navMeshAgent = GetComponent<NavMeshAgent>();
+            _health = GetComponent<Health>();
         }
 
         void Update() {
+            navMeshAgent.enabled = !_health.IsDead;
             UpdateAnimator();
         }
 

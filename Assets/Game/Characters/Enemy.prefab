@@ -26,6 +26,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b059d332a616490e98a8bdccf17e9adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8520586339924772269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515799205880796264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a90d6035540a4601b97bdb7461b51d54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseDistance: 5
+  suspicionTime: 5
+  patrolPath: {fileID: 0}
+  waypointTolerance: 1
 --- !u!1001 &4654885630663213778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -137,6 +153,10 @@ PrefabInstance:
     - target: {fileID: 2020961651187069169, guid: 1a557cd609840f140819573f9b12e7f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450038471619443232, guid: 1a557cd609840f140819573f9b12e7f8, type: 3}
+      propertyPath: m_Speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5981954872849031310, guid: 1a557cd609840f140819573f9b12e7f8, type: 3}
       propertyPath: m_Name
