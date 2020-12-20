@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Outcast.Combat {
+namespace Outcast.Core {
     public class Health : MonoBehaviour {
         [SerializeField] private float health = 100;
 
@@ -20,6 +20,7 @@ namespace Outcast.Combat {
             if (_isDead) return;
             _isDead = true;
             GetComponent<Animator>().SetTrigger("die");
+            GetComponent<ActionScheduler>().CancelCurrentAction();
         }
     }
 }
