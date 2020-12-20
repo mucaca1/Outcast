@@ -61,12 +61,12 @@ namespace Outcast.Control {
                     CycleWaypoint();
                 }
 
-                if (_timeSinceArrivedAtWaypoint > waipontDwellTime) {
-                    nextPosition = GetCurrentWaypoint();
-                }
+                nextPosition = GetCurrentWaypoint();
             }
 
-            _mover.StartMoveAction(nextPosition);
+            if (_timeSinceArrivedAtWaypoint > waipontDwellTime) {
+                _mover.StartMoveAction(nextPosition);
+            }
         }
 
         private Vector3 GetCurrentWaypoint() {
