@@ -10,7 +10,7 @@ namespace Outcast.Combat {
         [SerializeField] private float timeBetweenAttack = 0.7f;
         private Health target;
 
-        private float timeSinceLastAttack = 0f;
+        private float timeSinceLastAttack = Mathf.Infinity;
 
         private void Update() {
             timeSinceLastAttack += Time.deltaTime;
@@ -49,7 +49,7 @@ namespace Outcast.Combat {
             return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
         }
 
-        public void Attack(CombatTarget combatTarget) {
+        public void Attack(GameObject combatTarget) {
             GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget.GetComponent<Health>();
         }
@@ -64,7 +64,7 @@ namespace Outcast.Combat {
             GetComponent<Animator>().SetTrigger("stopAttack");
         }
 
-        public bool CanAttack(CombatTarget combatTarget) {
+        public bool CanAttack(GameObject combatTarget) {
             if (combatTarget == null) return false;
             Health targetHealth = combatTarget.GetComponent<Health>();
             return targetHealth != null && !targetHealth.IsDead;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Outcast.Core;
+using UnityEngine;
 
 namespace Outcast.Combat {
     

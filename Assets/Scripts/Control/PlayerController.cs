@@ -1,11 +1,21 @@
 ﻿using System;
 using Outcast.Combat;
+using Outcast.Core;
 using UnityEngine;
 using Outcast.Movement;
 
 namespace Outcast.Control {
     public class PlayerController : MonoBehaviour {
+
+        private Health _health;
+
+        private void Start() {
+            _health = GetComponent<Health>();
+        }
+
         private void Update() {
+            if (_health.IsDead) return;
+            
             if (InteractWithCombat()) return;
             if (InteractWithInput()) return;
             print("Nothing to do...");
@@ -15,10 +25,11 @@ namespace Outcast.Control {
             RaycastHit[] raycastHits = Physics.RaycastAll(GetMouseRay());
             foreach (RaycastHit hit in raycastHits) {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (!GetComponent<Fighter>().CanAttack(target)) continue;
+                if (target == null) continue;
+                if (!GetComponent<Fighter>().CanAttack(target.gameObject)) continue;
 
                 if (Input.GetMouseButtonDown(0)) {
-                    GetComponent<Fighter>().Attack(target);
+                    GetComponent<Fighter>().Attack(target.gameObject);
                 }
 
                 return true;
