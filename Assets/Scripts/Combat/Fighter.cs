@@ -14,10 +14,8 @@ namespace Outcast.Combat {
 
         private void Update() {
             timeSinceLastAttack += Time.deltaTime;
-            if (timeSinceLastAttack < 0) timeSinceLastAttack = 0f;
             if (target == null) return;
             if (!GetIsInRange()) {
-                timeSinceLastAttack = 0f;
                 GetComponent<Mover>().MoveTo(target.position);
             }
             else {
