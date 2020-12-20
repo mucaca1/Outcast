@@ -6,6 +6,8 @@ namespace Outcast.Combat {
 
         private bool _isDead = false;
 
+        public bool IsDead => _isDead;
+
         public void TakeDamage(float demage) {
             health = Mathf.Max(health - demage, 0);
             print(health);
