@@ -11,12 +11,17 @@ namespace Outcast.Control {
 
         private GameObject _player;
         private Fighter _fighter;
+        private Mover _mover;
         private Health _health;
+
+        private Vector3 _guardPosition;
 
         private void Start() {
             _player = GameObject.FindWithTag("Player");
             _fighter = GetComponent<Fighter>();
             _health = GetComponent<Health>();
+            _mover = GetComponent<Mover>();
+            _guardPosition = transform.position;
         }
 
         private void Update() {
@@ -27,13 +32,18 @@ namespace Outcast.Control {
                 _fighter.Attack(_player);
             }
             else {
-                _fighter.Cancel();
+                _mover.StartMoveAction(_guardPosition);
             }
         }
 
         private bool InAttackRangeOfThePlayer() {
             float distanceToPlayer = Vector3.Distance(_player.transform.position, transform.position);
             return distanceToPlayer < chaseDistance;
+        }
+
+        private void OnDrawGizmosSelected() {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, chaseDistance);
         }
     }
 }
