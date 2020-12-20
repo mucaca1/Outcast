@@ -11,6 +11,7 @@ namespace Outcast.Control {
         [SerializeField] private float suspicionTime = 3f;
         [SerializeField] private PatrolPath patrolPath;
         [SerializeField] private float waypointTolerance = 1f;
+        [SerializeField] private float waipontDwellTime = 2f;
 
         private GameObject _player;
         private Fighter _fighter;
@@ -19,6 +20,7 @@ namespace Outcast.Control {
 
         private Vector3 _guardPosition;
         private float _lastSinceLastSawPlayer = Mathf.Infinity;
+        private float _timeSinceArrivedAtWaypoint = Mathf.Infinity;
 
         private int _currentWaypointIndex = 0;
 
@@ -34,7 +36,6 @@ namespace Outcast.Control {
             if (_health.IsDead) return;
 
             if (InAttackRangeOfThePlayer() && _fighter.CanAttack(_player)) {
-                _lastSinceLastSawPlayer = 0f;
                 AttackBehaviour();
             }
             else if (_lastSinceLastSawPlayer < suspicionTime) {
@@ -44,17 +45,25 @@ namespace Outcast.Control {
                 PatrolBehaviour();
             }
 
+            UpdateTimers();
+        }
+
+        private void UpdateTimers() {
             _lastSinceLastSawPlayer += Time.deltaTime;
+            _timeSinceArrivedAtWaypoint += Time.deltaTime;
         }
 
         private void PatrolBehaviour() {
             Vector3 nextPosition = _guardPosition;
             if (patrolPath != null) {
                 if (AtWaypoint()) {
+                    _timeSinceArrivedAtWaypoint = 0f;
                     CycleWaypoint();
                 }
 
-                nextPosition = GetCurrentWaypoint();
+                if (_timeSinceArrivedAtWaypoint > waipontDwellTime) {
+                    nextPosition = GetCurrentWaypoint();
+                }
             }
 
             _mover.StartMoveAction(nextPosition);
@@ -78,6 +87,7 @@ namespace Outcast.Control {
         }
 
         private void AttackBehaviour() {
+            _lastSinceLastSawPlayer = 0f;
             _fighter.Attack(_player);
         }
 
