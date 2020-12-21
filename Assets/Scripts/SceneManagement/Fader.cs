@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Outcast.Management {
+namespace Outcast.SceneManagement {
     public class Fader : MonoBehaviour {
         private CanvasGroup _canvasGroup;
 

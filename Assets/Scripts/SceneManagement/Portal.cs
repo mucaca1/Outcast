@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Outcast.Management {
+namespace Outcast.SceneManagement {
     public class Portal : MonoBehaviour {
 
         enum DestinationIdentifier {
