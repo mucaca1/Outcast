@@ -10,6 +10,9 @@ namespace Outcast.SceneManagement {
             _canvasGroup = GetComponent<CanvasGroup>();
         }
 
+        public void FadeOutImmediate() {
+            _canvasGroup.alpha = 1f;
+        }
 
        public IEnumerator FadeOut(float time) {
             while (_canvasGroup.alpha < 1f) {

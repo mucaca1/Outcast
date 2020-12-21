@@ -1,17 +1,20 @@
 ﻿using System;
+using Outcast.SceneManagement;
 using UnityEngine;
 
 namespace Outcast.Core {
     public class PersistentObjectSpawner : MonoBehaviour {
         [SerializeField] private GameObject permistentObjectPrefab;
 
-        private bool wasSpawned = false;
+        private static bool _wasSpawned = false;
+
         private void Awake() {
-            if (wasSpawned) return;
+            if (_wasSpawned) {
+                return;
+            }
 
             SpawnPersistentObject();
-
-            wasSpawned = true;
+            _wasSpawned = true;
         }
 
         private void SpawnPersistentObject() {
