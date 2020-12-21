@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 namespace Outcast.Movement {
     public class Mover : MonoBehaviour, IAction {
+        [SerializeField] private float maxSpeed = 6f;
         private NavMeshAgent navMeshAgent;
         private Health _health;
 
@@ -25,13 +26,14 @@ namespace Outcast.Movement {
             GetComponent<Animator>().SetFloat("fowardSpeed", speed);
         }
 
-        public void StartMoveAction(Vector3 destination) {
+        public void StartMoveAction(Vector3 destination, float speedFraction) {
             GetComponent<ActionScheduler>().StartAction(this);
-            MoveTo(destination);
+            MoveTo(destination, speedFraction);
         }
 
-        public void MoveTo(Vector3 destination) {
+        public void MoveTo(Vector3 destination, float speedFraction) {
             navMeshAgent.destination = destination;
+            navMeshAgent.speed = maxSpeed * Mathf.Clamp01(speedFraction);
             navMeshAgent.isStopped = false;
         }
 

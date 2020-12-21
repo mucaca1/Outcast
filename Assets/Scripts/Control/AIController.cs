@@ -12,6 +12,7 @@ namespace Outcast.Control {
         [SerializeField] private PatrolPath patrolPath;
         [SerializeField] private float waypointTolerance = 1f;
         [SerializeField] private float waipontDwellTime = 2f;
+        [Range(0, 1)] [SerializeField] private float patrolSpeedFraction = 0.2f;
 
         private GameObject _player;
         private Fighter _fighter;
@@ -65,7 +66,7 @@ namespace Outcast.Control {
             }
 
             if (_timeSinceArrivedAtWaypoint > waipontDwellTime) {
-                _mover.StartMoveAction(nextPosition);
+                _mover.StartMoveAction(nextPosition, patrolSpeedFraction);
             }
         }
 
