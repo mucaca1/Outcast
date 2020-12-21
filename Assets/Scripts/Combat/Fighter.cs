@@ -8,9 +8,17 @@ namespace Outcast.Combat {
         [SerializeField] private float weaponRange = 2f;
         [SerializeField] private float weaponDamage = 5f;
         [SerializeField] private float timeBetweenAttack = 0.7f;
+
+        [SerializeField] private GameObject weaponPrefab = null;
+        [SerializeField] private Transform handTransform = null;
+        
         private Health target;
 
         private float timeSinceLastAttack = Mathf.Infinity;
+
+        private void Start() {
+            SpawnWeapon();
+        }
 
         private void Update() {
             timeSinceLastAttack += Time.deltaTime;
@@ -23,6 +31,12 @@ namespace Outcast.Combat {
                 GetComponent<Mover>().Cancel();
                 AttackBehaviour();
             }
+        }
+
+        void SpawnWeapon() {
+            if (weaponPrefab == null || handTransform == null) return;
+
+            Instantiate(weaponPrefab, handTransform);
         }
 
         private void AttackBehaviour() {
