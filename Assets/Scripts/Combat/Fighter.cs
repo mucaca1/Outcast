@@ -17,7 +17,7 @@ namespace Outcast.Combat {
             if (target == null) return;
             if (target.IsDead) return;
             if (!GetIsInRange()) {
-                GetComponent<Mover>().MoveTo(target.transform.position);
+                GetComponent<Mover>().MoveTo(target.transform.position, 1f);
             }
             else {
                 GetComponent<Mover>().Cancel();
@@ -56,6 +56,7 @@ namespace Outcast.Combat {
 
         public void Cancel() {
             StopAttack();
+            GetComponent<Mover>().Cancel();
             target = null;
         }
 
