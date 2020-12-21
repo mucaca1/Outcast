@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using RPG.Saving;
+using UnityEngine;
 
 namespace Outcast.Core {
-    public class Health : MonoBehaviour {
+    public class Health : MonoBehaviour, ISaveable {
         [SerializeField] private float health = 100;
 
         private bool _isDead = false;
@@ -21,6 +22,18 @@ namespace Outcast.Core {
             _isDead = true;
             GetComponent<Animator>().SetTrigger("die");
             GetComponent<ActionScheduler>().CancelCurrentAction();
+        }
+
+        public object CaptureState() {
+            return health;
+        }
+
+        public void RestoreState(object state) {
+            health = (float) state;
+            
+            if (health == 0) {
+                Die();
+            }
         }
     }
 }

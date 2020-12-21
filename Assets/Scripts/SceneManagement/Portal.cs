@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
-namespace Outcast.Management {
+namespace Outcast.SceneManagement {
     public class Portal : MonoBehaviour {
 
         enum DestinationIdentifier {
@@ -29,12 +30,21 @@ namespace Outcast.Management {
             }
             DontDestroyOnLoad(gameObject);
 
+            SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
+
             Fader fader = FindObjectOfType<Fader>();
             yield return fader.FadeOut(fadeOutTime);
+            
+            wrapper.Save();
+            
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
+            
+            wrapper.Load();
 
             Portal otherPortal = GetAnotherPortal();
             UpdatePlayer(otherPortal);
+
+            wrapper.Save();
             
             yield return new WaitForSeconds(fadeWaitTime);
             yield return fader.FadeIn(fadeInTime);
@@ -44,8 +54,10 @@ namespace Outcast.Management {
 
         private void UpdatePlayer(Portal otherPortal) {
             GameObject player = GameObject.FindWithTag("Player");
+            player.GetComponent<NavMeshAgent>().enabled = false;
             player.transform.position = otherPortal.spawnPoint.position;
             player.transform.rotation = otherPortal.spawnPoint.rotation;
+            player.GetComponent<NavMeshAgent>().enabled = true;
         }
 
         private Portal GetAnotherPortal() {
