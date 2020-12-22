@@ -5,19 +5,19 @@ using Outcast.Movement;
 
 namespace Outcast.Combat {
     public class Fighter : MonoBehaviour, IAction {
-        [SerializeField] private float weaponRange = 2f;
-        [SerializeField] private float weaponDamage = 5f;
         [SerializeField] private float timeBetweenAttack = 0.7f;
-
-        [SerializeField] private GameObject weaponPrefab = null;
-        [SerializeField] private Transform handTransform = null;
-        
+        [SerializeField] private Transform rightHandTransform = null;
+        [SerializeField] private Transform leftHandTransform = null;
+        [SerializeField] private Weapon defaultWeapon = null;
         private Health target;
 
         private float timeSinceLastAttack = Mathf.Infinity;
+        private Animator _animator;
+        private Weapon _currnetWeapon = null;
 
         private void Start() {
-            SpawnWeapon();
+            _animator = GetComponent<Animator>();
+            EquipWeapon(defaultWeapon);
         }
 
         private void Update() {
@@ -33,10 +33,10 @@ namespace Outcast.Combat {
             }
         }
 
-        void SpawnWeapon() {
-            if (weaponPrefab == null || handTransform == null) return;
-
-            Instantiate(weaponPrefab, handTransform);
+        public void EquipWeapon(Weapon weapon) {
+            if (weapon == null) return;
+            _currnetWeapon = weapon;
+            weapon.SpawnWeapon(rightHandTransform, leftHandTransform, _animator);
         }
 
         private void AttackBehaviour() {
@@ -56,11 +56,20 @@ namespace Outcast.Combat {
         // Hit event called from animation
         void Hit() {
             if (target == null) return;
-            target.TakeDamage(weaponDamage);
+            if (_currnetWeapon.HasProjectile()) {
+                _currnetWeapon.SpawnProjectile(rightHandTransform, leftHandTransform, target);
+            }
+            else {
+                target.TakeDamage(_currnetWeapon.WeaponDamage);
+            }
+        }
+
+        void Shoot() {
+            Hit();
         }
 
         private bool GetIsInRange() {
-            return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
+            return Vector3.Distance(transform.position, target.transform.position) < _currnetWeapon.WeaponRange;
         }
 
         public void Attack(GameObject combatTarget) {
