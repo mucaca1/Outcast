@@ -11,6 +11,9 @@ namespace Outcast.Combat {
         [SerializeField] private float speed = 1f;
         [SerializeField] private bool _isHoming = true;
         [SerializeField] private GameObject hitEffect = null;
+        [SerializeField] private float maxLiveTime = 10f;
+        [SerializeField] private GameObject[] destroyOnHit = null;
+        [SerializeField] private float lifeAfterImpact = 0.2f;
         
         private Health target;
         private float demage = 0f;
@@ -35,6 +38,8 @@ namespace Outcast.Combat {
         public void SetTarget(Health target, float demage) {
             this.demage = demage;
             this.target = target;
+            
+            Destroy(gameObject, maxLiveTime);
         }
 
         private void OnTriggerEnter(Collider other) {
@@ -43,8 +48,14 @@ namespace Outcast.Combat {
             if (hitEffect != null) {
                 Instantiate(hitEffect, GetAimPosition(), transform.rotation);
             }
+
+            speed = 0;
+            
             target.TakeDamage(demage);
-            Destroy(gameObject);
+            foreach (GameObject o in destroyOnHit) {
+                Destroy(o);
+            }
+            Destroy(gameObject, lifeAfterImpact);
         }
     }
 }

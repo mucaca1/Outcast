@@ -22,8 +22,14 @@ namespace Outcast.Combat {
 
         public void SpawnWeapon(Transform rightHand, Transform leftHand, Animator animator) {
             DestroyOldWeapon(rightHand, leftHand);
-            if (_animatorOveride != null)
+            var overrideAnimator = animator.runtimeAnimatorController as AnimatorOverrideController;
+            if (_animatorOveride != null) {
                 animator.runtimeAnimatorController = _animatorOveride;
+            }
+            else if (overrideAnimator != null) {
+                animator.runtimeAnimatorController = overrideAnimator.runtimeAnimatorController;
+            }
+
             if (equipedPrefab != null) {
                 GameObject weapon = Instantiate(equipedPrefab, GetHand(rightHand, leftHand));
                 weapon.name = _weaponName;
@@ -35,10 +41,9 @@ namespace Outcast.Combat {
             if (oldWeapon == null) {
                 oldWeapon = leftHand.Find(_weaponName);
                 if (oldWeapon == null) return;
-
-                oldWeapon.name = "DESTROYED";
-                Destroy(oldWeapon.gameObject);
             }
+            oldWeapon.name = "DESTROYED";
+            Destroy(oldWeapon.gameObject);
         }
 
         public void SpawnProjectile(Transform rightHand, Transform leftHand, Health target) {
