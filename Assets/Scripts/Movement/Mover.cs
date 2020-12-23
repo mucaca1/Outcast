@@ -49,9 +49,10 @@ namespace Outcast.Movement {
 
         public void RestoreState(object state) {
             SerializableVector3 position = (SerializableVector3)state;
-            GetComponent<NavMeshAgent>().enabled = false;
+            NavMeshAgent agent = GetComponent<NavMeshAgent>();
+            agent.enabled = false;
             transform.position = position.ToVector();
-            GetComponent<NavMeshAgent>().enabled = true;
+            agent.enabled = true;
         }
     }
 }
