@@ -8,13 +8,20 @@ using Vector3 = UnityEngine.Vector3;
 namespace Outcast.Combat {
     public class Projectile : MonoBehaviour {
         [SerializeField] private float speed = 1f;
-
+        [SerializeField] private bool _isHoming = true;
+        
         private Health target;
         private float demage = 0f;
 
+        private void Start() {
+            transform.LookAt(GetAimPosition());
+        }
+
         private void Update() {
             if (target == null) return;
-            transform.LookAt(GetAimPosition());
+            if (_isHoming && !target.IsDead) {
+                transform.LookAt(GetAimPosition());
+            }
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
@@ -30,7 +37,7 @@ namespace Outcast.Combat {
 
         private void OnTriggerEnter(Collider other) {
             if (other.GetComponent<Health>() != target) return;
-            
+            if (target.IsDead) return;
             target.TakeDamage(demage);
             Destroy(gameObject);
         }
