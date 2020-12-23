@@ -3,12 +3,14 @@ using System.Numerics;
 using Outcast.Core;
 using UnityEngine;
 using UnityEngine.UI;
+using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Outcast.Combat {
     public class Projectile : MonoBehaviour {
         [SerializeField] private float speed = 1f;
         [SerializeField] private bool _isHoming = true;
+        [SerializeField] private GameObject hitEffect = null;
         
         private Health target;
         private float demage = 0f;
@@ -38,6 +40,9 @@ namespace Outcast.Combat {
         private void OnTriggerEnter(Collider other) {
             if (other.GetComponent<Health>() != target) return;
             if (target.IsDead) return;
+            if (hitEffect != null) {
+                Instantiate(hitEffect, GetAimPosition(), transform.rotation);
+            }
             target.TakeDamage(demage);
             Destroy(gameObject);
         }
