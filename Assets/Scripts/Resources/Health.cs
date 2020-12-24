@@ -16,12 +16,19 @@ namespace Outcast.Resources {
             health = GetComponent<BaseStats>().GetHealth();
         }
 
-        public void TakeDamage(float demage) {
+        public void TakeDamage(float demage, GameObject instigator) {
             health = Mathf.Max(health - demage, 0);
             print(health);
             if (health == 0) {
                 Die();
+                AwardExperience(instigator);
             }
+        }
+
+        private void AwardExperience(GameObject instigator) {
+            Experience experience = instigator.GetComponent<Experience>();
+            if (experience == null) return;
+            experience.GainExperience(GetComponent<BaseStats>().GerExperienceReward());
         }
 
         private void Die() {
@@ -41,7 +48,7 @@ namespace Outcast.Resources {
 
         public void RestoreState(object state) {
             health = (float) state;
-            
+
             if (health == 0) {
                 Die();
             }

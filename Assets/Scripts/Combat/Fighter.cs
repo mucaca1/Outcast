@@ -55,14 +55,18 @@ namespace Outcast.Combat {
             GetComponent<Animator>().SetTrigger("attack");
         }
 
+        public Health GetTarget() {
+            return target;
+        }
+
         // Hit event called from animation
         void Hit() {
             if (target == null) return;
             if (_currnetWeapon.HasProjectile()) {
-                _currnetWeapon.SpawnProjectile(rightHandTransform, leftHandTransform, target);
+                _currnetWeapon.SpawnProjectile(rightHandTransform, leftHandTransform, target, gameObject);
             }
             else {
-                target.TakeDamage(_currnetWeapon.WeaponDamage);
+                target.TakeDamage(_currnetWeapon.WeaponDamage, gameObject);
             }
         }
 

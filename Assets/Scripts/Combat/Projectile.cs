@@ -18,6 +18,7 @@ namespace Outcast.Combat {
         
         private Health target;
         private float demage = 0f;
+        private GameObject instigator;
 
         private void Start() {
             transform.LookAt(GetAimPosition());
@@ -36,9 +37,10 @@ namespace Outcast.Combat {
             return target.gameObject.transform.position + Vector3.up * collider.height / 2;
         }
 
-        public void SetTarget(Health target, float demage) {
+        public void SetTarget(Health target, GameObject instigator, float demage) {
             this.demage = demage;
             this.target = target;
+            this.instigator = instigator;
             
             Destroy(gameObject, maxLiveTime);
         }
@@ -52,7 +54,7 @@ namespace Outcast.Combat {
 
             speed = 0;
             
-            target.TakeDamage(demage);
+            target.TakeDamage(demage, instigator);
             foreach (GameObject o in destroyOnHit) {
                 Destroy(o);
             }

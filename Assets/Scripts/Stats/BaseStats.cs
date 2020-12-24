@@ -11,5 +11,9 @@ namespace Outcast.Stats {
         public float GetHealth() {
             return _progression.GetHealth(characterClass, startingLevel);
         }
+
+        public float GerExperienceReward() {
+            return 10f;
+        }
     }
 }

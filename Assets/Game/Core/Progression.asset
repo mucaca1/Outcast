@@ -14,24 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterClass:
   - characterClass: 0
-    life:
-    - 20
-    - 30
-    - 40
-    - 50
-    - 60
-    - 70
+    stats:
+    - stat:0
+      levels:
+      - 20
+      - 30
+      - 40
+      - 50
+      - 60
+      - 70
   - characterClass: 1
-    life:
-    - 10
-    - 15
-    - 20
-    - 30
-    - 35
+    stats:
+    - stat:0
+      levels:
+      - 10
+      - 15
+      - 20
+      - 30
+      - 35
   - characterClass: 3
-    life:
-    - 5
-    - 10
-    - 15
-    - 20
-    - 25
+    stats:
+    - stat: 0
+      levels:
+      - 5
+      - 10
+      - 15
+      - 20
+      - 25
