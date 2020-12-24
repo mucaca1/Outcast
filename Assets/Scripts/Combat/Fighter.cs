@@ -2,6 +2,7 @@ using System;
 using Outcast.Core;
 using UnityEngine;
 using Outcast.Movement;
+using Outcast.Resources;
 using RPG.Saving;
 
 namespace Outcast.Combat {
@@ -101,7 +102,7 @@ namespace Outcast.Combat {
 
         public void RestoreState(object state) {
             string weaponName = (string) state;
-            Weapon weapon = Resources.Load<Weapon>(weaponName);
+            Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName);
             EquipWeapon(weapon);
         }
     }

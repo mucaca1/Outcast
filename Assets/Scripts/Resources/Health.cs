@@ -1,13 +1,20 @@
-﻿using RPG.Saving;
+﻿using System;
+using Outcast.Core;
+using Outcast.Stats;
+using RPG.Saving;
 using UnityEngine;
 
-namespace Outcast.Core {
+namespace Outcast.Resources {
     public class Health : MonoBehaviour, ISaveable {
         [SerializeField] private float health = 100;
 
         private bool _isDead = false;
 
         public bool IsDead => _isDead;
+
+        private void Start() {
+            health = GetComponent<BaseStats>().GetHealth();
+        }
 
         public void TakeDamage(float demage) {
             health = Mathf.Max(health - demage, 0);
@@ -26,6 +33,10 @@ namespace Outcast.Core {
 
         public object CaptureState() {
             return health;
+        }
+
+        public float GetPercentage() {
+            return 100 * (health / GetComponent<BaseStats>().GetHealth());
         }
 
         public void RestoreState(object state) {

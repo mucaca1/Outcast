@@ -2,6 +2,7 @@
 using Outcast.Combat;
 using Outcast.Core;
 using Outcast.Movement;
+using Outcast.Resources;
 using UnityEngine;
 using UnityEngine.AI;
 

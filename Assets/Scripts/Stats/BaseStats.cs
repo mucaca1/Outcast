@@ -7,5 +7,9 @@ namespace Outcast.Stats {
         [SerializeField] private int startingLevel = 1;
         [SerializeField] private CharacterClass characterClass;
         [SerializeField] private Progression _progression = null;
+
+        public float GetHealth() {
+            return _progression.GetHealth(characterClass, startingLevel);
+        }
     }
 }

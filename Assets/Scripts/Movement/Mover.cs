@@ -1,5 +1,6 @@
 using System;
 using Outcast.Core;
+using Outcast.Resources;
 using RPG.Saving;
 using UnityEngine;
 using UnityEngine.AI;

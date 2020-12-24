@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Numerics;
 using Outcast.Core;
+using Outcast.Resources;
 using UnityEngine;
 using UnityEngine.UI;
 using Quaternion = UnityEngine.Quaternion;
