@@ -8,12 +8,6 @@ namespace Outcast.Stats {
         [SerializeField] private CharacterClass characterClass;
         [SerializeField] private Progression _progression = null;
 
-        private void Update() {
-            if (gameObject.tag == "Player") {
-                print(GetLevel());
-            }
-        }
-
         public float GetStat(Stat stat) {
             return _progression.GetStat(stat, characterClass, GetLevel());
         }
