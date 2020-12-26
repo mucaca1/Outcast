@@ -31,6 +31,9 @@ namespace Outcast.Stats {
         }
 
         public int GetLevel() {
+            if (_currentLevel < 0) {
+                _currentLevel = CalculateLevel();
+            }
             return _currentLevel;
         }
 
