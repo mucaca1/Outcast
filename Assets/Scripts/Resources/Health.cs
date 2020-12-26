@@ -13,7 +13,7 @@ namespace Outcast.Resources {
         public bool IsDead => _isDead;
 
         private void Start() {
-            health = GetComponent<BaseStats>().GetHealth();
+            health = GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
         public void TakeDamage(float demage, GameObject instigator) {
@@ -28,7 +28,7 @@ namespace Outcast.Resources {
         private void AwardExperience(GameObject instigator) {
             Experience experience = instigator.GetComponent<Experience>();
             if (experience == null) return;
-            experience.GainExperience(GetComponent<BaseStats>().GerExperienceReward());
+            experience.GainExperience(GetComponent<BaseStats>().GetStat(Stat.ExperienceReward));
         }
 
         private void Die() {
@@ -43,7 +43,7 @@ namespace Outcast.Resources {
         }
 
         public float GetPercentage() {
-            return 100 * (health / GetComponent<BaseStats>().GetHealth());
+            return 100 * (health / GetComponent<BaseStats>().GetStat(Stat.Health));
         }
 
         public void RestoreState(object state) {
