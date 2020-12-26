@@ -8,11 +8,33 @@ namespace Outcast.Stats {
         [SerializeField] private CharacterClass characterClass;
         [SerializeField] private Progression _progression = null;
 
+        private int _currentLevel;
+        
+        private void Start() {
+            _currentLevel = GetLevel();
+            Experience experience = GetComponent<Experience>();
+            if (experience != null) {
+                experience.onExlerienceGained += UpdateLevel;
+            }
+        }
+
+        private void UpdateLevel() {
+            int newLevel = GetLevel();
+            if (newLevel > _currentLevel) {
+                _currentLevel = newLevel;
+                print("Levelled up!");
+            }
+        }
+        
         public float GetStat(Stat stat) {
             return _progression.GetStat(stat, characterClass, GetLevel());
         }
 
         public int GetLevel() {
+            return _currentLevel;
+        }
+
+        public int CalculateLevel() {
             Experience experience = GetComponent<Experience>();
             if (experience == null) return startingLevel;
             float currentXP = experience.GetPoints();

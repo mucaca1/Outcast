@@ -6,20 +6,22 @@ using UnityEngine;
 
 namespace Outcast.Resources {
     public class Health : MonoBehaviour, ISaveable {
-        [SerializeField] private float health = 100;
+        private float _health = -1f;
 
         private bool _isDead = false;
 
         public bool IsDead => _isDead;
 
         private void Start() {
-            health = GetComponent<BaseStats>().GetStat(Stat.Health);
+            if (_health < 0) {
+                _health = GetComponent<BaseStats>().GetStat(Stat.Health);
+            }
         }
 
         public void TakeDamage(float demage, GameObject instigator) {
-            health = Mathf.Max(health - demage, 0);
-            print(health);
-            if (health == 0) {
+            _health = Mathf.Max(_health - demage, 0);
+            print(_health);
+            if (_health == 0) {
                 Die();
                 AwardExperience(instigator);
             }
@@ -39,17 +41,17 @@ namespace Outcast.Resources {
         }
 
         public object CaptureState() {
-            return health;
+            return _health;
         }
 
         public float GetPercentage() {
-            return 100 * (health / GetComponent<BaseStats>().GetStat(Stat.Health));
+            return 100 * (_health / GetComponent<BaseStats>().GetStat(Stat.Health));
         }
 
         public void RestoreState(object state) {
-            health = (float) state;
+            _health = (float) state;
 
-            if (health == 0) {
+            if (_health == 0) {
                 Die();
             }
         }
