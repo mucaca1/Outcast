@@ -2,6 +2,7 @@
     public enum Stat {
         Health,
         ExperienceReward,
-        ExperienceLevelUp
+        ExperienceLevelUp,
+        Damage
     }
 }

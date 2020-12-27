@@ -47,11 +47,11 @@ namespace Outcast.Combat {
             Destroy(oldWeapon.gameObject);
         }
 
-        public void SpawnProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator) {
+        public void SpawnProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float calculatedDamage) {
             if (target == null) return;
             GameObject instantiatedProjectile =
                 Instantiate(projectilePrefab, GetHand(rightHand, leftHand).position, Quaternion.identity);
-            instantiatedProjectile.GetComponent<Projectile>().SetTarget(target, instigator, weaponRange);
+            instantiatedProjectile.GetComponent<Projectile>().SetTarget(target, instigator, calculatedDamage);
         }
 
         public bool HasProjectile() {

@@ -3,6 +3,7 @@ using Outcast.Core;
 using UnityEngine;
 using Outcast.Movement;
 using Outcast.Resources;
+using Outcast.Stats;
 using RPG.Saving;
 
 namespace Outcast.Combat {
@@ -62,11 +63,12 @@ namespace Outcast.Combat {
         // Hit event called from animation
         void Hit() {
             if (target == null) return;
+            float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
             if (_currnetWeapon.HasProjectile()) {
-                _currnetWeapon.SpawnProjectile(rightHandTransform, leftHandTransform, target, gameObject);
+                _currnetWeapon.SpawnProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
             }
             else {
-                target.TakeDamage(_currnetWeapon.WeaponDamage, gameObject);
+                target.TakeDamage(damage, gameObject);
             }
         }
 

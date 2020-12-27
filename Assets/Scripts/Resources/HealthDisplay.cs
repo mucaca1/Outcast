@@ -11,7 +11,7 @@ namespace Outcast.Resources {
         }
 
         private void Update() {
-            GetComponent<Text>().text = String.Format("{0:0}%",_health.GetPercentage().ToString());
+            GetComponent<Text>().text = String.Format("{0:0}/{1:0}",_health.GetHealthPoints(), _health.GetMaxHealthPoints());
         }
     }
 }

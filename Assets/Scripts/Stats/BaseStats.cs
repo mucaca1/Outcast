@@ -7,8 +7,11 @@ namespace Outcast.Stats {
         [SerializeField] private int startingLevel = 1;
         [SerializeField] private CharacterClass characterClass;
         [SerializeField] private Progression _progression = null;
+        [SerializeField] private GameObject levelUpParticleEffectPrefab = null;
 
-        private int _currentLevel;
+        public event Action onLevelUp;
+        
+        private int _currentLevel = -1;
         
         private void Start() {
             _currentLevel = GetLevel();
@@ -19,13 +22,18 @@ namespace Outcast.Stats {
         }
 
         private void UpdateLevel() {
-            int newLevel = GetLevel();
+            int newLevel = CalculateLevel();
             if (newLevel > _currentLevel) {
                 _currentLevel = newLevel;
-                print("Levelled up!");
+                LevelUpEffect();
+                onLevelUp();
             }
         }
-        
+
+        private void LevelUpEffect() {
+            Instantiate(levelUpParticleEffectPrefab, transform);
+        }
+
         public float GetStat(Stat stat) {
             return _progression.GetStat(stat, characterClass, GetLevel());
         }

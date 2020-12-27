@@ -21,6 +21,7 @@ namespace Outcast.Stats {
         }
 
         public int GetLevels(Stat stat, CharacterClass characterClass) {
+            BuildLookUp();
             float[] levels = _stats[characterClass][stat];
             return levels.Length;
         }

@@ -6,7 +6,7 @@ namespace Outcast.SceneManagement {
     public class Fader : MonoBehaviour {
         private CanvasGroup _canvasGroup;
 
-        private void Start() {
+        private void Awake() {
             _canvasGroup = GetComponent<CanvasGroup>();
         }
 
