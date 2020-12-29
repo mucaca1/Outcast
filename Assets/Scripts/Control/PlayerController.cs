@@ -10,6 +10,22 @@ namespace Outcast.Control {
 
         private Health _health;
 
+        enum CursorType {
+            None,
+            Move,
+            Combat
+        }
+
+        [System.Serializable]
+        struct CursorMapping {
+            public CursorType type;
+
+            public Texture2D texture;
+            public Vector2 hotspot;
+        }
+
+        [SerializeField] private CursorMapping[] _cursorMappings = null;
+
         private void Awake() {
             _health = GetComponent<Health>();
         }
@@ -19,7 +35,8 @@ namespace Outcast.Control {
             
             if (InteractWithCombat()) return;
             if (InteractWithInput()) return;
-            print("Nothing to do...");
+            
+            SetCursor(CursorType.None);
         }
 
         private bool InteractWithCombat() {
@@ -33,6 +50,7 @@ namespace Outcast.Control {
                     GetComponent<Fighter>().Attack(target.gameObject);
                 }
 
+                SetCursor(CursorType.Combat);
                 return true;
             }
 
@@ -47,10 +65,27 @@ namespace Outcast.Control {
                     GetComponent<Mover>().StartMoveAction(hit.point, 1f);
                 }
 
+                SetCursor(CursorType.Move);
                 return true;
             }
 
             return false;
+        }
+
+        private void SetCursor(CursorType type) {
+            CursorMapping mapping = GetCursorMapping(type);
+            Cursor.SetCursor(mapping.texture, mapping.hotspot, CursorMode.Auto);
+        }
+
+        private CursorMapping GetCursorMapping(CursorType type) {
+
+            foreach (CursorMapping mapping in _cursorMappings) {
+                if (mapping.type == type) {
+                    return mapping;
+                }
+            }
+
+            return _cursorMappings[0];
         }
 
         private static Ray GetMouseRay() {
