@@ -7,10 +7,19 @@ using UnityEngine.Playables;
 namespace Outcast.Cinematics {
     public class CinematicControlRemover : MonoBehaviour {
         private GameObject _player;
-        private void Start() {
+
+        private void Awake() {
+            _player = GameObject.FindWithTag("Player");
+        }
+
+        private void OnEnable() {
             GetComponent<PlayableDirector>().played += DisableControll;
             GetComponent<PlayableDirector>().stopped += EnableControl;
-            _player = GameObject.FindWithTag("Player");
+        }
+
+        private void OnDisable() {
+            GetComponent<PlayableDirector>().played -= DisableControll;
+            GetComponent<PlayableDirector>().stopped -= EnableControl;
         }
 
         void DisableControll(PlayableDirector pd) {

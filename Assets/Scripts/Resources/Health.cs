@@ -1,4 +1,5 @@
 ﻿using System;
+using GameDevTV.Utils;
 using Outcast.Core;
 using Outcast.Stats;
 using RPG.Saving;
@@ -6,35 +7,50 @@ using UnityEngine;
 
 namespace Outcast.Resources {
     public class Health : MonoBehaviour, ISaveable {
-
         [SerializeField] private float regeneratePercentage = 70f;
 
-        private float _health = -1f;
+        private LazyValue<float> _health;
 
         private bool _isDead = false;
 
         public bool IsDead => _isDead;
 
-        private void Start() {
-            if (_health < 0) {
-                _health = GetComponent<BaseStats>().GetStat(Stat.Health);
-            }
+        private void Awake() {
+            _health = new LazyValue<float>(InitializationHealth);
+        }
 
+        private void Start() {
+            _health.ForceInit();
+        }
+
+        private float InitializationHealth() {
+            return GetComponent<BaseStats>().GetStat(Stat.Health);
+        }
+
+        private void OnEnable() {
             BaseStats stats = GetComponent<BaseStats>();
             if (stats == null) return;
 
             stats.onLevelUp += RegenerateHealth;
         }
 
+        private void OnDisable() {
+            BaseStats stats = GetComponent<BaseStats>();
+            if (stats == null) return;
+
+            stats.onLevelUp -= RegenerateHealth;
+        }
+
         private void RegenerateHealth() {
-            float regeneratedPercentageHealt = GetComponent<BaseStats>().GetStat(Stat.Health) * (regeneratePercentage / 100);
-            _health = Mathf.Max(_health, regeneratedPercentageHealt);
+            float regeneratedPercentageHealt =
+                GetComponent<BaseStats>().GetStat(Stat.Health) * (regeneratePercentage / 100);
+            _health.value = Mathf.Max(_health.value, regeneratedPercentageHealt);
         }
 
         public void TakeDamage(float demage, GameObject instigator) {
-            _health = Mathf.Max(_health - demage, 0);
+            _health.value = Mathf.Max(_health.value - demage, 0);
             print(instigator.name + " deal demage: " + demage);
-            if (_health == 0) {
+            if (_health.value == 0) {
                 Die();
                 AwardExperience(instigator);
             }
@@ -58,11 +74,11 @@ namespace Outcast.Resources {
         }
 
         public float GetPercentage() {
-            return 100 * (_health / GetComponent<BaseStats>().GetStat(Stat.Health));
+            return 100 * (_health.value / GetComponent<BaseStats>().GetStat(Stat.Health));
         }
 
         public float GetHealthPoints() {
-            return _health;
+            return _health.value;
         }
 
         public float GetMaxHealthPoints() {
@@ -70,9 +86,9 @@ namespace Outcast.Resources {
         }
 
         public void RestoreState(object state) {
-            _health = (float) state;
+            _health.value = (float) state;
 
-            if (_health == 0) {
+            if (_health.value == 0) {
                 Die();
             }
         }

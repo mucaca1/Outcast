@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GameDevTV.Utils;
 using Outcast.Core;
 using UnityEngine;
 using Outcast.Movement;
@@ -16,12 +17,19 @@ namespace Outcast.Combat {
         private Health target;
 
         private float timeSinceLastAttack = Mathf.Infinity;
-        private Weapon _currnetWeapon = null;
+        private LazyValue<Weapon> _currnetWeapon;
 
+        private void Awake() {
+            _currnetWeapon = new LazyValue<Weapon>(InitializationWeapon);
+        }
+        
         private void Start() {
-            if (_currnetWeapon == null) {
-                EquipWeapon(defaultWeapon);
-            }
+            _currnetWeapon.ForceInit();
+        }
+
+        private Weapon InitializationWeapon() {
+            AttachWeapon(defaultWeapon);
+            return defaultWeapon;
         }
 
         private void Update() {
@@ -39,7 +47,11 @@ namespace Outcast.Combat {
 
         public void EquipWeapon(Weapon weapon) {
             if (weapon == null) return;
-            _currnetWeapon = weapon;
+            AttachWeapon(weapon);
+        }
+
+        private void AttachWeapon(Weapon weapon) {
+            _currnetWeapon.value = weapon;
             weapon.SpawnWeapon(rightHandTransform, leftHandTransform, GetComponent<Animator>());
         }
 
@@ -65,8 +77,8 @@ namespace Outcast.Combat {
         void Hit() {
             if (target == null) return;
             float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
-            if (_currnetWeapon.HasProjectile()) {
-                _currnetWeapon.SpawnProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
+            if (_currnetWeapon.value.HasProjectile()) {
+                _currnetWeapon.value.SpawnProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
             }
             else {
                 target.TakeDamage(damage, gameObject);
@@ -78,7 +90,7 @@ namespace Outcast.Combat {
         }
 
         private bool GetIsInRange() {
-            return Vector3.Distance(transform.position, target.transform.position) < _currnetWeapon.WeaponRange;
+            return Vector3.Distance(transform.position, target.transform.position) < _currnetWeapon.value.WeaponRange;
         }
 
         public void Attack(GameObject combatTarget) {
@@ -104,7 +116,7 @@ namespace Outcast.Combat {
         }
 
         public object CaptureState() {
-            return _currnetWeapon.name;
+            return _currnetWeapon.value.name;
         }
 
         public void RestoreState(object state) {
@@ -115,13 +127,13 @@ namespace Outcast.Combat {
 
         public IEnumerable<float> GetAdditiveModifiers(Stat stat) {
             if (stat == Stat.Damage) {
-                yield return _currnetWeapon.WeaponDamage;
+                yield return _currnetWeapon.value.WeaponDamage;
             }
         }
 
         public IEnumerable<float> GetPercentageModifiers(Stat stat) {
             if (stat == Stat.Damage) {
-                yield return _currnetWeapon.PercentageModifier;
+                yield return _currnetWeapon.value.PercentageModifier;
             }
         }
     }

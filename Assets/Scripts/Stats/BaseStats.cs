@@ -1,4 +1,5 @@
 ﻿using System;
+using GameDevTV.Utils;
 using UnityEngine;
 
 namespace Outcast.Stats {
@@ -11,20 +12,31 @@ namespace Outcast.Stats {
         [SerializeField] private bool shouldUseModifiers = false;
         public event Action onLevelUp;
         
-        private int _currentLevel = -1;
-        
-        private void Start() {
-            _currentLevel = GetLevel();
-            Experience experience = GetComponent<Experience>();
+        private LazyValue<int> _currentLevel;
+
+        private Experience experience;
+
+        private void Awake() {
+            experience = GetComponent<Experience>();
+            _currentLevel = new LazyValue<int>(GetLevel);
+        }
+
+        private void OnEnable() {
             if (experience != null) {
                 experience.onExlerienceGained += UpdateLevel;
             }
         }
 
+        private void OnDisable() {
+            if (experience != null) {
+                experience.onExlerienceGained -= UpdateLevel;
+            }
+        }
+
         private void UpdateLevel() {
             int newLevel = CalculateLevel();
-            if (newLevel > _currentLevel) {
-                _currentLevel = newLevel;
+            if (newLevel > _currentLevel.value) {
+                _currentLevel.value = newLevel;
                 LevelUpEffect();
                 onLevelUp();
             }
@@ -71,10 +83,10 @@ namespace Outcast.Stats {
         }
 
         public int GetLevel() {
-            if (_currentLevel < 0) {
-                _currentLevel = CalculateLevel();
+            if (_currentLevel.value < 0) {
+                _currentLevel.value = CalculateLevel();
             }
-            return _currentLevel;
+            return _currentLevel.value;
         }
 
         public int CalculateLevel() {

@@ -12,7 +12,7 @@ namespace Outcast.Movement {
         private NavMeshAgent navMeshAgent;
         private Health _health;
 
-        private void Start() {
+        private void Awake() {
             navMeshAgent = GetComponent<NavMeshAgent>();
             _health = GetComponent<Health>();
         }
