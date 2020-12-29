@@ -11,6 +11,7 @@ namespace Outcast.Combat {
 
         [SerializeField] private float weaponRange = 2f;
         [SerializeField] private float weaponDamage = 5f;
+        [SerializeField] private float percentageModifier = 0f;
 
         [SerializeField] private bool isRightHanded = true;
         [SerializeField] private GameObject projectilePrefab = null;
@@ -20,6 +21,8 @@ namespace Outcast.Combat {
         public float WeaponDamage => weaponDamage;
 
         public float WeaponRange => weaponRange;
+
+        public float PercentageModifier => percentageModifier;
 
         public void SpawnWeapon(Transform rightHand, Transform leftHand, Animator animator) {
             DestroyOldWeapon(rightHand, leftHand);

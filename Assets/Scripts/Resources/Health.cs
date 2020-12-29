@@ -33,7 +33,7 @@ namespace Outcast.Resources {
 
         public void TakeDamage(float demage, GameObject instigator) {
             _health = Mathf.Max(_health - demage, 0);
-            print(_health);
+            print(instigator.name + " deal demage: " + demage);
             if (_health == 0) {
                 Die();
                 AwardExperience(instigator);

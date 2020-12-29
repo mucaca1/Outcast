@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Outcast.Core;
 using UnityEngine;
 using Outcast.Movement;
@@ -7,7 +8,7 @@ using Outcast.Stats;
 using RPG.Saving;
 
 namespace Outcast.Combat {
-    public class Fighter : MonoBehaviour, IAction, ISaveable {
+    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider {
         [SerializeField] private float timeBetweenAttack = 0.7f;
         [SerializeField] private Transform rightHandTransform = null;
         [SerializeField] private Transform leftHandTransform = null;
@@ -110,6 +111,18 @@ namespace Outcast.Combat {
             string weaponName = (string) state;
             Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName);
             EquipWeapon(weapon);
+        }
+
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat) {
+            if (stat == Stat.Damage) {
+                yield return _currnetWeapon.WeaponDamage;
+            }
+        }
+
+        public IEnumerable<float> GetPercentageModifiers(Stat stat) {
+            if (stat == Stat.Damage) {
+                yield return _currnetWeapon.PercentageModifier;
+            }
         }
     }
 }
