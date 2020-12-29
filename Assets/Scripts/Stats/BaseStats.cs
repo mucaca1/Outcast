@@ -18,7 +18,11 @@ namespace Outcast.Stats {
 
         private void Awake() {
             experience = GetComponent<Experience>();
-            _currentLevel = new LazyValue<int>(GetLevel);
+            _currentLevel = new LazyValue<int>(CalculateLevel);
+        }
+
+        private void Start() {
+            _currentLevel.ForceInit();
         }
 
         private void OnEnable() {

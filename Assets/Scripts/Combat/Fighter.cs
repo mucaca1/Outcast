@@ -17,6 +17,7 @@ namespace Outcast.Combat {
         private Health target;
 
         private float timeSinceLastAttack = Mathf.Infinity;
+        
         private LazyValue<Weapon> _currnetWeapon;
 
         private void Awake() {

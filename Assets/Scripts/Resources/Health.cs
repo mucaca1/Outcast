@@ -18,14 +18,16 @@ namespace Outcast.Resources {
         private void Awake() {
             _health = new LazyValue<float>(InitializationHealth);
         }
-
+        
+        private float InitializationHealth() {
+            return GetComponent<BaseStats>().GetStat(Stat.Health);
+        }
+        
         private void Start() {
             _health.ForceInit();
         }
 
-        private float InitializationHealth() {
-            return GetComponent<BaseStats>().GetStat(Stat.Health);
-        }
+
 
         private void OnEnable() {
             BaseStats stats = GetComponent<BaseStats>();
