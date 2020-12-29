@@ -3,13 +3,14 @@ using Outcast.Combat;
 using Outcast.Core;
 using UnityEngine;
 using Outcast.Movement;
+using Outcast.Resources;
 
 namespace Outcast.Control {
     public class PlayerController : MonoBehaviour {
 
         private Health _health;
 
-        private void Start() {
+        private void Awake() {
             _health = GetComponent<Health>();
         }
 

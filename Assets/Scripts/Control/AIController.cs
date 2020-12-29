@@ -1,7 +1,9 @@
 ﻿using System;
+using GameDevTV.Utils;
 using Outcast.Combat;
 using Outcast.Core;
 using Outcast.Movement;
+using Outcast.Resources;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,18 +21,27 @@ namespace Outcast.Control {
         private Mover _mover;
         private Health _health;
 
-        private Vector3 _guardPosition;
+        private LazyValue<Vector3> _guardPosition;
         private float _lastSinceLastSawPlayer = Mathf.Infinity;
         private float _timeSinceArrivedAtWaypoint = Mathf.Infinity;
 
         private int _currentWaypointIndex = 0;
 
-        private void Start() {
+        private void Awake() {
             _player = GameObject.FindWithTag("Player");
             _fighter = GetComponent<Fighter>();
             _health = GetComponent<Health>();
             _mover = GetComponent<Mover>();
-            _guardPosition = transform.position;
+            
+            _guardPosition = new LazyValue<Vector3>(InitializeGuardPosition);
+        }
+
+        private void Start() {
+            _guardPosition.ForceInit();
+        }
+
+        private Vector3 InitializeGuardPosition() {
+            return transform.position;
         }
 
         private void Update() {
@@ -55,7 +66,7 @@ namespace Outcast.Control {
         }
 
         private void PatrolBehaviour() {
-            Vector3 nextPosition = _guardPosition;
+            Vector3 nextPosition = _guardPosition.value;
             if (patrolPath != null) {
                 if (AtWaypoint()) {
                     _timeSinceArrivedAtWaypoint = 0f;

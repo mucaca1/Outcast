@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Numerics;
 using Outcast.Core;
+using Outcast.Resources;
 using UnityEngine;
 using UnityEngine.UI;
 using Quaternion = UnityEngine.Quaternion;
@@ -16,7 +17,8 @@ namespace Outcast.Combat {
         [SerializeField] private float lifeAfterImpact = 0.2f;
         
         private Health target;
-        private float demage = 0f;
+        private float damage = 0f;
+        private GameObject instigator;
 
         private void Start() {
             transform.LookAt(GetAimPosition());
@@ -35,9 +37,10 @@ namespace Outcast.Combat {
             return target.gameObject.transform.position + Vector3.up * collider.height / 2;
         }
 
-        public void SetTarget(Health target, float demage) {
-            this.demage = demage;
+        public void SetTarget(Health target, GameObject instigator, float damage) {
+            this.damage = damage;
             this.target = target;
+            this.instigator = instigator;
             
             Destroy(gameObject, maxLiveTime);
         }
@@ -51,7 +54,7 @@ namespace Outcast.Combat {
 
             speed = 0;
             
-            target.TakeDamage(demage);
+            target.TakeDamage(damage, instigator);
             foreach (GameObject o in destroyOnHit) {
                 Destroy(o);
             }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using Outcast.Core;
+using Outcast.Resources;
 using UnityEngine;
 
 namespace Outcast.Combat {
@@ -10,6 +11,7 @@ namespace Outcast.Combat {
 
         [SerializeField] private float weaponRange = 2f;
         [SerializeField] private float weaponDamage = 5f;
+        [SerializeField] private float percentageModifier = 0f;
 
         [SerializeField] private bool isRightHanded = true;
         [SerializeField] private GameObject projectilePrefab = null;
@@ -19,6 +21,8 @@ namespace Outcast.Combat {
         public float WeaponDamage => weaponDamage;
 
         public float WeaponRange => weaponRange;
+
+        public float PercentageModifier => percentageModifier;
 
         public void SpawnWeapon(Transform rightHand, Transform leftHand, Animator animator) {
             DestroyOldWeapon(rightHand, leftHand);
@@ -46,11 +50,11 @@ namespace Outcast.Combat {
             Destroy(oldWeapon.gameObject);
         }
 
-        public void SpawnProjectile(Transform rightHand, Transform leftHand, Health target) {
+        public void SpawnProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float calculatedDamage) {
             if (target == null) return;
             GameObject instantiatedProjectile =
                 Instantiate(projectilePrefab, GetHand(rightHand, leftHand).position, Quaternion.identity);
-            instantiatedProjectile.GetComponent<Projectile>().SetTarget(target, weaponRange);
+            instantiatedProjectile.GetComponent<Projectile>().SetTarget(target, instigator, calculatedDamage);
         }
 
         public bool HasProjectile() {
