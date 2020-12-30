@@ -10,9 +10,14 @@ namespace Outcast.Resources {
     public class Health : MonoBehaviour, ISaveable {
         [SerializeField] private float regeneratePercentage = 70f;
 
-        [SerializeField] private UnityEvent takeDamage;
+        [SerializeField] private DamageEvent takeDamage;
+
+        private bool _isDead = false;
+
+        [System.Serializable]
+        class DamageEvent : UnityEvent<float> {
             
-            private bool _isDead = false;
+        }
 
         private LazyValue<float> _health;
 
@@ -21,15 +26,14 @@ namespace Outcast.Resources {
         private void Awake() {
             _health = new LazyValue<float>(InitializationHealth);
         }
-        
+
         private float InitializationHealth() {
             return GetComponent<BaseStats>().GetStat(Stat.Health);
         }
-        
+
         private void Start() {
             _health.ForceInit();
         }
-
 
 
         private void OnEnable() {
@@ -52,13 +56,16 @@ namespace Outcast.Resources {
             _health.value = Mathf.Max(_health.value, regeneratedPercentageHealt);
         }
 
-        public void TakeDamage(float demage, GameObject instigator) {
-            _health.value = Mathf.Max(_health.value - demage, 0);
-            print(instigator.name + " deal demage: " + demage);
-            takeDamage.Invoke();
+        public void TakeDamage(float damage, GameObject instigator) {
+            _health.value = Mathf.Max(_health.value - damage, 0);
+            print(instigator.name + " deal demage: " + damage);
+
             if (_health.value == 0) {
                 Die();
                 AwardExperience(instigator);
+            }
+            else {
+                takeDamage.Invoke(damage);
             }
         }
 

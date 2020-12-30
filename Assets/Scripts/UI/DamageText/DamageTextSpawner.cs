@@ -7,6 +7,7 @@ namespace Outcast.UI.DamageText {
 
         public void Spawn(float damage) {
             DamageText text = Instantiate<DamageText>(_damageText, transform);
+            text.SetValue(damage);
         }
     }
 }
