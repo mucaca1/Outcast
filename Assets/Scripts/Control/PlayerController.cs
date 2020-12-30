@@ -4,16 +4,17 @@ using Outcast.Core;
 using UnityEngine;
 using Outcast.Movement;
 using Outcast.Resources;
+using UnityEngine.EventSystems;
 
 namespace Outcast.Control {
     public class PlayerController : MonoBehaviour {
-
         private Health _health;
 
         enum CursorType {
             None,
             Move,
-            Combat
+            Combat,
+            UI
         }
 
         [System.Serializable]
@@ -31,29 +32,39 @@ namespace Outcast.Control {
         }
 
         private void Update() {
-            if (_health.IsDead) return;
-            
-            if (InteractWithCombat()) return;
+            if (InteractWithUI()) return;
+
+            if (_health.IsDead) {
+                SetCursor(CursorType.None);
+                return;
+            }
+
+            if (InteractWithRaycastable()) return;
             if (InteractWithInput()) return;
-            
+
             SetCursor(CursorType.None);
         }
 
-        private bool InteractWithCombat() {
+        private bool InteractWithRaycastable() {
             RaycastHit[] raycastHits = Physics.RaycastAll(GetMouseRay());
             foreach (RaycastHit hit in raycastHits) {
-                CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (target == null) continue;
-                if (!GetComponent<Fighter>().CanAttack(target.gameObject)) continue;
-
-                if (Input.GetMouseButton(0)) {
-                    GetComponent<Fighter>().Attack(target.gameObject);
+                IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
+                foreach (IRaycastable raycastable in raycastables) {
+                    if (raycastable.HandleRaycast(this)) {
+                        SetCursor(CursorType.Combat);
+                        return true;
+                    }
                 }
-
-                SetCursor(CursorType.Combat);
-                return true;
             }
 
+            return false;
+        }
+
+        private bool InteractWithUI() {
+            if (EventSystem.current.IsPointerOverGameObject()) {
+                SetCursor(CursorType.UI);
+                return true;
+            }
             return false;
         }
 
@@ -78,7 +89,6 @@ namespace Outcast.Control {
         }
 
         private CursorMapping GetCursorMapping(CursorType type) {
-
             foreach (CursorMapping mapping in _cursorMappings) {
                 if (mapping.type == type) {
                     return mapping;
