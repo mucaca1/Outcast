@@ -4,14 +4,17 @@ using Outcast.Core;
 using Outcast.Stats;
 using RPG.Saving;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Outcast.Resources {
     public class Health : MonoBehaviour, ISaveable {
         [SerializeField] private float regeneratePercentage = 70f;
 
-        private LazyValue<float> _health;
+        [SerializeField] private UnityEvent takeDamage;
+            
+            private bool _isDead = false;
 
-        private bool _isDead = false;
+        private LazyValue<float> _health;
 
         public bool IsDead => _isDead;
 
@@ -52,6 +55,7 @@ namespace Outcast.Resources {
         public void TakeDamage(float demage, GameObject instigator) {
             _health.value = Mathf.Max(_health.value - demage, 0);
             print(instigator.name + " deal demage: " + demage);
+            takeDamage.Invoke();
             if (_health.value == 0) {
                 Die();
                 AwardExperience(instigator);
