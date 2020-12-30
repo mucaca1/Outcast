@@ -399,6 +399,7 @@ Transform:
   - {fileID: 704916230}
   - {fileID: 1716904954}
   - {fileID: 1896749477}
+  - {fileID: 816927598}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2378,6 +2379,102 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
   m_PrefabInstance: {fileID: 807367144}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &816927597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 816927598}
+  - component: {fileID: 816927601}
+  - component: {fileID: 816927600}
+  - component: {fileID: 816927599}
+  m_Layer: 0
+  m_Name: Wather
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &816927598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816927597}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.4, z: 0}
+  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_Children: []
+  m_Father: {fileID: 41779278}
+  m_RootOrder: 39
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &816927599
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816927597}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &816927600
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816927597}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9045494f93452344d811e0d183904816, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &816927601
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816927597}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &832258110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3258,7 +3355,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252121553}
-  m_LocalRotation: {x: 0.10866775, y: -0.035371333, z: 0.0038691, w: 0.9934411}
+  m_LocalRotation: {x: 0.10866773, y: -0.035371296, z: 0.0038690958, w: 0.9934411}
   m_LocalPosition: {x: 13.064568, y: -0.486156, z: 7.4592295}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5214,7 +5311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4773393712918846546, guid: ec0ee14501684b640b2fac1f51ae9a86, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1.72e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4773393712918846546, guid: ec0ee14501684b640b2fac1f51ae9a86, type: 3}
       propertyPath: m_BoundingSphereOverride.x
@@ -5222,11 +5319,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4773393712918846546, guid: ec0ee14501684b640b2fac1f51ae9a86, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -0.0000000029714684
+      value: -33089536
       objectReference: {fileID: 0}
     - target: {fileID: 4773393712918846546, guid: ec0ee14501684b640b2fac1f51ae9a86, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 5.98e-43
+      value: 4.5905e-41
       objectReference: {fileID: 0}
     - target: {fileID: 4773393712944411252, guid: ec0ee14501684b640b2fac1f51ae9a86, type: 3}
       propertyPath: m_Name

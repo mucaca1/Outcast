@@ -5,6 +5,7 @@ using Outcast.Core;
 using UnityEngine;
 using Outcast.Movement;
 using Outcast.Resources;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 namespace Outcast.Control {
@@ -20,6 +21,7 @@ namespace Outcast.Control {
         }
 
         [SerializeField] private CursorMapping[] _cursorMappings = null;
+        [SerializeField] private float maxNavMeshProjectionDistance = 1f;
 
         private void Awake() {
             _health = GetComponent<Health>();
@@ -75,18 +77,29 @@ namespace Outcast.Control {
         }
 
         private bool InteractWithInput() {
-            RaycastHit hit;
-            bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+            Vector3 target;
+            bool hasHit = RaycastHitWalkable(out target);
             if (hasHit) {
                 if (Input.GetMouseButton(0)) {
-                    GetComponent<Mover>().StartMoveAction(hit.point, 1f);
+                    GetComponent<Mover>().StartMoveAction(target, 1f);
                 }
-
                 SetCursor(CursorType.Move);
                 return true;
             }
 
             return false;
+        }
+
+        private bool RaycastHitWalkable(out Vector3 target) {
+            target = new Vector3();
+            RaycastHit hit;
+            bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+            if (!hasHit) return false;
+            NavMeshHit navHit;
+            bool hasNavMeshHit = NavMesh.SamplePosition(hit.point, out navHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
+            if (!hasNavMeshHit) return false;
+            target = navHit.position;
+            return true;
         }
 
         private void SetCursor(CursorType type) {
