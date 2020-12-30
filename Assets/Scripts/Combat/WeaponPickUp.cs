@@ -32,6 +32,10 @@ namespace Outcast.Combat {
             }
         }
 
+        public CursorType GetCursorType() {
+            return CursorType.Pickup;
+        }
+
         public bool HandleRaycast(PlayerController controller) {
             if (Input.GetMouseButtonDown(0)) {
                 PickUp(controller.GetComponent<Fighter>());

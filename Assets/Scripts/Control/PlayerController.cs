@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Outcast.Combat;
 using Outcast.Core;
 using UnityEngine;
@@ -9,13 +10,6 @@ using UnityEngine.EventSystems;
 namespace Outcast.Control {
     public class PlayerController : MonoBehaviour {
         private Health _health;
-
-        enum CursorType {
-            None,
-            Move,
-            Combat,
-            UI
-        }
 
         [System.Serializable]
         struct CursorMapping {
@@ -46,18 +40,30 @@ namespace Outcast.Control {
         }
 
         private bool InteractWithRaycastable() {
-            RaycastHit[] raycastHits = Physics.RaycastAll(GetMouseRay());
+            RaycastHit[] raycastHits = GetSortedRaycastHit();
             foreach (RaycastHit hit in raycastHits) {
                 IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
                 foreach (IRaycastable raycastable in raycastables) {
                     if (raycastable.HandleRaycast(this)) {
-                        SetCursor(CursorType.Combat);
+                        SetCursor(raycastable.GetCursorType());
                         return true;
                     }
                 }
             }
 
             return false;
+        }
+
+        private RaycastHit[] GetSortedRaycastHit() {
+            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            float[] distances = new float[hits.Length];
+            
+            for (int i = 0; i < hits.Length; i++) {
+                distances[i] = hits[i].distance;
+            }
+            
+            Array.Sort(distances, hits);
+            return hits;
         }
 
         private bool InteractWithUI() {
