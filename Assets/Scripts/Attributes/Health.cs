@@ -11,6 +11,7 @@ namespace Outcast.Attributes {
         [SerializeField] private float regeneratePercentage = 70f;
 
         [SerializeField] private DamageEvent takeDamage;
+        [SerializeField] private UnityEvent onDie;
 
         private bool _isDead = false;
 
@@ -61,6 +62,7 @@ namespace Outcast.Attributes {
             print(instigator.name + " deal demage: " + damage);
 
             if (_health.value == 0) {
+                onDie.Invoke();
                 Die();
                 AwardExperience(instigator);
             }
