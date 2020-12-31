@@ -11,6 +11,7 @@ namespace Outcast.Attributes {
             float fraction = _healthComponent.GetFraction();
             if (Mathf.Approximately(fraction, 0) || Mathf.Approximately(fraction, 1)) {
                 rootCanvas.enabled = false;
+                return;
             }
 
             rootCanvas.enabled = true;

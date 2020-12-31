@@ -24,7 +24,7 @@ namespace Outcast.SceneManagement {
        }
 
        private IEnumerator FadeRoutine(float target, float time) {
-           while (Mathf.Approximately(_canvasGroup.alpha, target)) {
+           while (!Mathf.Approximately(_canvasGroup.alpha, target)) {
                _canvasGroup.alpha = Mathf.MoveTowards(_canvasGroup.alpha, target, Time.deltaTime / time);
                yield return null;
            }
