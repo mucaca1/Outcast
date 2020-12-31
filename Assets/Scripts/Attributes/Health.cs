@@ -6,7 +6,7 @@ using RPG.Saving;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Outcast.Resources {
+namespace Outcast.Attributes {
     public class Health : MonoBehaviour, ISaveable {
         [SerializeField] private float regeneratePercentage = 70f;
 
@@ -83,11 +83,15 @@ namespace Outcast.Resources {
         }
 
         public object CaptureState() {
-            return _health;
+            return _health.value;
         }
 
         public float GetPercentage() {
-            return 100 * (_health.value / GetComponent<BaseStats>().GetStat(Stat.Health));
+            return 100 * GetFraction();
+        }
+
+        public float GetFraction() {
+            return _health.value / GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
         public float GetHealthPoints() {

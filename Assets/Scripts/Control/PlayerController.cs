@@ -4,7 +4,7 @@ using Outcast.Combat;
 using Outcast.Core;
 using UnityEngine;
 using Outcast.Movement;
-using Outcast.Resources;
+using Outcast.Attributes;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 

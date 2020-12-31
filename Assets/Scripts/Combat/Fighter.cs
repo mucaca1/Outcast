@@ -4,7 +4,7 @@ using GameDevTV.Utils;
 using Outcast.Core;
 using UnityEngine;
 using Outcast.Movement;
-using Outcast.Resources;
+using Outcast.Attributes;
 using Outcast.Stats;
 using RPG.Saving;
 

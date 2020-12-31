@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using Outcast.Core;
-using Outcast.Resources;
+using Outcast.Attributes;
 using UnityEngine;
 
 namespace Outcast.Combat {

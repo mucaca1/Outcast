@@ -3,7 +3,7 @@ using GameDevTV.Utils;
 using Outcast.Combat;
 using Outcast.Core;
 using Outcast.Movement;
-using Outcast.Resources;
+using Outcast.Attributes;
 using UnityEngine;
 using UnityEngine.AI;
 
