@@ -7,30 +7,31 @@ using Outcast.Movement;
 using Outcast.Attributes;
 using Outcast.Stats;
 using RPG.Saving;
+using UnityEngine.Serialization;
 
 namespace Outcast.Combat {
     public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider {
         [SerializeField] private float timeBetweenAttack = 0.7f;
         [SerializeField] private Transform rightHandTransform = null;
         [SerializeField] private Transform leftHandTransform = null;
-        [SerializeField] private Weapon defaultWeapon = null;
+        [FormerlySerializedAs("defaultWeapon")] [SerializeField] private WeaponConfig defaultWeaponConfig = null;
         private Health target;
 
         private float timeSinceLastAttack = Mathf.Infinity;
         
-        private LazyValue<Weapon> _currnetWeapon;
+        private LazyValue<WeaponConfig> _currnetWeapon;
 
         private void Awake() {
-            _currnetWeapon = new LazyValue<Weapon>(InitializationWeapon);
+            _currnetWeapon = new LazyValue<WeaponConfig>(InitializationWeapon);
         }
         
         private void Start() {
             _currnetWeapon.ForceInit();
         }
 
-        private Weapon InitializationWeapon() {
-            AttachWeapon(defaultWeapon);
-            return defaultWeapon;
+        private WeaponConfig InitializationWeapon() {
+            AttachWeapon(defaultWeaponConfig);
+            return defaultWeaponConfig;
         }
 
         private void Update() {
@@ -46,14 +47,14 @@ namespace Outcast.Combat {
             }
         }
 
-        public void EquipWeapon(Weapon weapon) {
-            if (weapon == null) return;
-            AttachWeapon(weapon);
+        public void EquipWeapon(WeaponConfig weaponConfig) {
+            if (weaponConfig == null) return;
+            AttachWeapon(weaponConfig);
         }
 
-        private void AttachWeapon(Weapon weapon) {
-            _currnetWeapon.value = weapon;
-            weapon.SpawnWeapon(rightHandTransform, leftHandTransform, GetComponent<Animator>());
+        private void AttachWeapon(WeaponConfig weaponConfig) {
+            _currnetWeapon.value = weaponConfig;
+            weaponConfig.SpawnWeapon(rightHandTransform, leftHandTransform, GetComponent<Animator>());
         }
 
         private void AttackBehaviour() {
@@ -122,8 +123,8 @@ namespace Outcast.Combat {
 
         public void RestoreState(object state) {
             string weaponName = (string) state;
-            Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName);
-            EquipWeapon(weapon);
+            WeaponConfig weaponConfig = UnityEngine.Resources.Load<WeaponConfig>(weaponName);
+            EquipWeapon(weaponConfig);
         }
 
         public IEnumerable<float> GetAdditiveModifiers(Stat stat) {

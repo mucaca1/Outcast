@@ -2,10 +2,11 @@
 using System.Collections;
 using Outcast.Control;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Outcast.Combat {
     public class WeaponPickUp : MonoBehaviour, IRaycastable {
-        [SerializeField] private Weapon _weapon = null;
+        [FormerlySerializedAs("_weapon")] [SerializeField] private WeaponConfig weaponConfig = null;
         [SerializeField] private float hidenTime = 5f;
 
         private void OnTriggerEnter(Collider other) {
@@ -15,7 +16,7 @@ namespace Outcast.Combat {
         }
 
         private void PickUp(Fighter other) {
-            other.EquipWeapon(_weapon);
+            other.EquipWeapon(weaponConfig);
             StartCoroutine(HideForSeconds(hidenTime));
         }
 
