@@ -22,7 +22,6 @@ namespace Outcast.Control {
 
         [SerializeField] private CursorMapping[] _cursorMappings = null;
         [SerializeField] private float maxNavMeshProjectionDistance = 1f;
-        [SerializeField] private float maxPathLength = 10f;
 
         private void Awake() {
             _health = GetComponent<Health>();
@@ -82,6 +81,11 @@ namespace Outcast.Control {
             Vector3 target;
             bool hasHit = RaycastHitWalkable(out target);
             if (hasHit) {
+
+                if (!GetComponent<Mover>().CanMoveTo(target)) {
+                    return false;
+                }
+                
                 if (Input.GetMouseButton(0)) {
                     GetComponent<Mover>().StartMoveAction(target, 1f);
                 }
@@ -103,20 +107,8 @@ namespace Outcast.Control {
                 NavMesh.SamplePosition(hit.point, out navHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
             if (!hasNavMeshHit) return false;
             target = navHit.position;
-            NavMeshPath navMeshPath = new NavMeshPath();
-            bool canCalculatePath = NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, navMeshPath);
-            if (!canCalculatePath) return false;
-            if (CalculateLengthPath(navMeshPath) > maxPathLength) return false;
+
             return true;
-        }
-
-        private float CalculateLengthPath(NavMeshPath navMeshPath) {
-            float totalLength = 0f;
-            for (int i = 0; i < navMeshPath.corners.Length - 1; i++) {
-                totalLength += Vector3.Distance(navMeshPath.corners[i], navMeshPath.corners[i + 1]);
-            }
-
-            return totalLength;
         }
 
         private void SetCursor(CursorType type) {

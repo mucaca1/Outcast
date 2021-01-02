@@ -111,5 +111,9 @@ namespace Outcast.Attributes {
                 Die();
             }
         }
+
+        public void Heal(float heal) {
+            _health.value = Mathf.Min(_health.value + heal, GetMaxHealthPoints());
+        }
     }
 }

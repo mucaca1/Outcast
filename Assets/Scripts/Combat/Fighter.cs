@@ -120,6 +120,12 @@ namespace Outcast.Combat {
 
         public bool CanAttack(GameObject combatTarget) {
             if (combatTarget == null) return false;
+
+            if (!GetComponent<Mover>().CanMoveTo(combatTarget.transform.position) ||
+                !GetIsInRange()) {
+                return false;
+            }
+            
             Health targetHealth = combatTarget.GetComponent<Health>();
             return targetHealth != null && !targetHealth.IsDead;
         }

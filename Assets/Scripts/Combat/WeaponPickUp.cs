@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Outcast.Attributes;
 using Outcast.Control;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -8,15 +9,22 @@ namespace Outcast.Combat {
     public class WeaponPickUp : MonoBehaviour, IRaycastable {
         [FormerlySerializedAs("_weapon")] [SerializeField] private WeaponConfig weaponConfig = null;
         [SerializeField] private float hidenTime = 5f;
+        [SerializeField] private float heal = 0;
 
         private void OnTriggerEnter(Collider other) {
             if (other.gameObject.tag == "Player") {
-                PickUp(other.GetComponent<Fighter>());
+                PickUp(other.gameObject);
             }
         }
 
-        private void PickUp(Fighter other) {
-            other.EquipWeapon(weaponConfig);
+        private void PickUp(GameObject subject) {
+            if (weaponConfig != null) {
+                subject.GetComponent<Fighter>().EquipWeapon(weaponConfig);
+            }
+
+            if (heal > 0) {
+                subject.GetComponent<Health>().Heal(heal);
+            }
             StartCoroutine(HideForSeconds(hidenTime));
         }
 
@@ -39,7 +47,7 @@ namespace Outcast.Combat {
 
         public bool HandleRaycast(PlayerController controller) {
             if (Input.GetMouseButtonDown(0)) {
-                PickUp(controller.GetComponent<Fighter>());
+                PickUp(controller.gameObject);
             }
 
             return true;
