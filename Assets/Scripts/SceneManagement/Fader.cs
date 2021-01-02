@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Outcast.SceneManagement {
     public class Fader : MonoBehaviour {
         private CanvasGroup _canvasGroup;
+        private Coroutine _actualRunningCoroutine = null;
 
         private void Awake() {
             _canvasGroup = GetComponent<CanvasGroup>();
@@ -14,18 +15,28 @@ namespace Outcast.SceneManagement {
             _canvasGroup.alpha = 1f;
         }
 
-       public IEnumerator FadeOut(float time) {
-            while (_canvasGroup.alpha < 1f) {
-                _canvasGroup.alpha += Time.deltaTime / time;
-                yield return null;
-            }
-        }
-        
-        public IEnumerator FadeIn(float time) {
-            while (_canvasGroup.alpha > 0) {
-                _canvasGroup.alpha -= Time.deltaTime / time;
-                yield return null;
-            }
-        }
+       public Coroutine FadeOut(float time) {
+           return Fade(1, time);
+       }
+       
+       public Coroutine FadeIn(float time) {
+           return Fade(0, time);
+       }
+
+       private IEnumerator FadeRoutine(float target, float time) {
+           while (!Mathf.Approximately(_canvasGroup.alpha, target)) {
+               _canvasGroup.alpha = Mathf.MoveTowards(_canvasGroup.alpha, target, Time.deltaTime / time);
+               yield return null;
+           }
+       }
+
+       public Coroutine Fade(float target, float time) {
+           if (_actualRunningCoroutine != null) {
+               StopCoroutine(_actualRunningCoroutine);
+           }
+
+           _actualRunningCoroutine = StartCoroutine(FadeRoutine(target ,time));
+           return _actualRunningCoroutine;
+       }
     }
 }

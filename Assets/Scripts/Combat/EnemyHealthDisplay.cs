@@ -1,5 +1,5 @@
 ﻿using System;
-using Outcast.Resources;
+using Outcast.Attributes;
 using UnityEngine;
 using UnityEngine.UI;
 

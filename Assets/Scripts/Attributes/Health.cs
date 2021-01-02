@@ -4,14 +4,23 @@ using Outcast.Core;
 using Outcast.Stats;
 using RPG.Saving;
 using UnityEngine;
+using UnityEngine.Events;
 
-namespace Outcast.Resources {
+namespace Outcast.Attributes {
     public class Health : MonoBehaviour, ISaveable {
         [SerializeField] private float regeneratePercentage = 70f;
 
-        private LazyValue<float> _health;
+        [SerializeField] private DamageEvent takeDamage;
+        [SerializeField] private UnityEvent onDie;
 
         private bool _isDead = false;
+
+        [System.Serializable]
+        class DamageEvent : UnityEvent<float> {
+            
+        }
+
+        private LazyValue<float> _health;
 
         public bool IsDead => _isDead;
 
@@ -19,13 +28,14 @@ namespace Outcast.Resources {
             _health = new LazyValue<float>(InitializationHealth);
         }
 
+        private float InitializationHealth() {
+            return GetComponent<BaseStats>().GetStat(Stat.Health);
+        }
+
         private void Start() {
             _health.ForceInit();
         }
 
-        private float InitializationHealth() {
-            return GetComponent<BaseStats>().GetStat(Stat.Health);
-        }
 
         private void OnEnable() {
             BaseStats stats = GetComponent<BaseStats>();
@@ -47,12 +57,17 @@ namespace Outcast.Resources {
             _health.value = Mathf.Max(_health.value, regeneratedPercentageHealt);
         }
 
-        public void TakeDamage(float demage, GameObject instigator) {
-            _health.value = Mathf.Max(_health.value - demage, 0);
-            print(instigator.name + " deal demage: " + demage);
+        public void TakeDamage(float damage, GameObject instigator) {
+            _health.value = Mathf.Max(_health.value - damage, 0);
+            print(instigator.name + " deal demage: " + damage);
+
             if (_health.value == 0) {
+                onDie.Invoke();
                 Die();
                 AwardExperience(instigator);
+            }
+            else {
+                takeDamage.Invoke(damage);
             }
         }
 
@@ -70,11 +85,15 @@ namespace Outcast.Resources {
         }
 
         public object CaptureState() {
-            return _health;
+            return _health.value;
         }
 
         public float GetPercentage() {
-            return 100 * (_health.value / GetComponent<BaseStats>().GetStat(Stat.Health));
+            return 100 * GetFraction();
+        }
+
+        public float GetFraction() {
+            return _health.value / GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
         public float GetHealthPoints() {
@@ -91,6 +110,10 @@ namespace Outcast.Resources {
             if (_health.value == 0) {
                 Die();
             }
+        }
+
+        public void Heal(float heal) {
+            _health.value = Mathf.Min(_health.value + heal, GetMaxHealthPoints());
         }
     }
 }

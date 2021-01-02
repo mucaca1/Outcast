@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Outcast.Control;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -30,6 +31,9 @@ namespace Outcast.SceneManagement {
             }
             DontDestroyOnLoad(gameObject);
 
+            PlayerController playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            playerController.enabled = false;
+            
             SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
 
             Fader fader = FindObjectOfType<Fader>();
@@ -38,6 +42,8 @@ namespace Outcast.SceneManagement {
             wrapper.Save();
             
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
+            PlayerController newPlayerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            newPlayerController.enabled = false;
             
             wrapper.Load();
 
@@ -47,8 +53,10 @@ namespace Outcast.SceneManagement {
             wrapper.Save();
             
             yield return new WaitForSeconds(fadeWaitTime);
-            yield return fader.FadeIn(fadeInTime);
-
+            fader.FadeIn(fadeInTime);
+            
+            newPlayerController.enabled = true;
+            
             Destroy(gameObject);
         }
 

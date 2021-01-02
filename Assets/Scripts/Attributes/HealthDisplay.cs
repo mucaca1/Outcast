@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Outcast.Resources {
+namespace Outcast.Attributes {
     public class HealthDisplay : MonoBehaviour {
         private Health _health;
 
