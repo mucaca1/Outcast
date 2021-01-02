@@ -40,7 +40,7 @@ namespace Outcast.Combat {
             timeSinceLastAttack += Time.deltaTime;
             if (target == null) return;
             if (target.IsDead) return;
-            if (!GetIsInRange()) {
+            if (!GetIsInRange(target.transform)) {
                 GetComponent<Mover>().MoveTo(target.transform.position, 1f);
             }
             else {
@@ -98,8 +98,8 @@ namespace Outcast.Combat {
             Hit();
         }
 
-        private bool GetIsInRange() {
-            return Vector3.Distance(transform.position, target.transform.position) < _currnetWeaponConfig.WeaponRange;
+        private bool GetIsInRange(Transform targetTransform) {
+            return Vector3.Distance(transform.position, targetTransform.position) < _currnetWeaponConfig.WeaponRange;
         }
 
         public void Attack(GameObject combatTarget) {
@@ -122,7 +122,7 @@ namespace Outcast.Combat {
             if (combatTarget == null) return false;
 
             if (!GetComponent<Mover>().CanMoveTo(combatTarget.transform.position) ||
-                !GetIsInRange()) {
+                !GetIsInRange(combatTarget.transform)) {
                 return false;
             }
             
