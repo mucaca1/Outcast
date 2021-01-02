@@ -24,9 +24,10 @@ namespace Outcast.Combat {
 
         public float PercentageModifier => percentageModifier;
 
-        public void SpawnWeapon(Transform rightHand, Transform leftHand, Animator animator) {
+        public Weapon SpawnWeapon(Transform rightHand, Transform leftHand, Animator animator) {
             DestroyOldWeapon(rightHand, leftHand);
             var overrideAnimator = animator.runtimeAnimatorController as AnimatorOverrideController;
+            Weapon weapon = null;
             if (_animatorOveride != null) {
                 animator.runtimeAnimatorController = _animatorOveride;
             }
@@ -35,9 +36,11 @@ namespace Outcast.Combat {
             }
 
             if (equipedPrefab != null) {
-                Weapon weapon = Instantiate(equipedPrefab, GetHand(rightHand, leftHand));
+                weapon = Instantiate(equipedPrefab, GetHand(rightHand, leftHand));
                 weapon.gameObject.name = _weaponName;
             }
+
+            return weapon;
         }
 
         private void DestroyOldWeapon(Transform rightHand, Transform leftHand) {
