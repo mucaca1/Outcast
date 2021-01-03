@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b438989a08431cafd45364a7646676, type: 3}
   m_Name: BowBlue
   m_EditorClassIdentifier: 
+  itemID: d3971da2-1cb7-4d65-b0c0-fc49e2e9ffa1
+  displayName: Blue bow
+  description: Ooo what a color.
+  icon: {fileID: 21300000, guid: ec22508be0cdfba4abbaeb770bef08aa, type: 3}
+  pickup: {fileID: 6727226974276361653, guid: 723eee6e563eb7b40aaf80667d538078, type: 3}
+  stackable: 0
+  allowedEquipLocation: 5
   equipedPrefab: {fileID: 7178779590678656227, guid: 8361cf2c161dd2a4392703a85e9c3507, type: 3}
   _animatorOveride: {fileID: 22100000, guid: 1e21fe96575cdc04c9f43ffce4e49858, type: 2}
   weaponRange: 10

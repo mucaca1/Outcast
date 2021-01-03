@@ -51,7 +51,7 @@ namespace Outcast.Stats {
         }
 
         public float GetStat(Stat stat) {
-            if (shouldUseModifiers) {
+            if (!shouldUseModifiers) {
                 return GetBaseStat(stat);
             }
             else {

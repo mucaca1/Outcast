@@ -23,6 +23,8 @@ namespace Outcast.Control {
         [SerializeField] private CursorMapping[] _cursorMappings = null;
         [SerializeField] private float maxNavMeshProjectionDistance = 1f;
 
+        private bool _isDraggingUI = false;
+
         private void Awake() {
             _health = GetComponent<Health>();
         }
@@ -69,11 +71,18 @@ namespace Outcast.Control {
         }
 
         private bool InteractWithUI() {
+            if (Input.GetMouseButtonUp(0)) {
+                _isDraggingUI = false;
+            }
             if (EventSystem.current.IsPointerOverGameObject()) {
+                if (Input.GetMouseButtonDown(0)) {
+                    _isDraggingUI = true;
+                }
                 SetCursor(CursorType.UI);
                 return true;
             }
 
+            if (_isDraggingUI) return true;
             return false;
         }
 
