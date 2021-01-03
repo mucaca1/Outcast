@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 5746370270708029085}
   - component: {fileID: 5588262430224360621}
   - component: {fileID: 7990305117829074833}
+  - component: {fileID: 8108420196455812733}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -296,6 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 6
+  maxPathLength: 20
 --- !u!114 &3677631466977700781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,7 +313,7 @@ MonoBehaviour:
   timeBetweenAttack: 0.7
   rightHandTransform: {fileID: 0}
   leftHandTransform: {fileID: 0}
-  defaultWeapon: {fileID: 0}
+  defaultWeaponConfig: {fileID: 0}
 --- !u!114 &4266490157275817599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,6 +427,18 @@ MonoBehaviour:
   _progression: {fileID: 11400000, guid: 473818cb1c9591147a1cd4e632739be2, type: 2}
   levelUpParticleEffectPrefab: {fileID: 0}
   shouldUseModifiers: 0
+--- !u!114 &8108420196455812733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5981954872849031310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c756a4f32f0d945bb0d60bb0f29ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8604977970550062815
 GameObject:
   m_ObjectHideFlags: 0

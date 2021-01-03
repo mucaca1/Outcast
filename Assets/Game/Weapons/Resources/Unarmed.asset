@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b438989a08431cafd45364a7646676, type: 3}
   m_Name: Unarmed
   m_EditorClassIdentifier: 
+  itemID: 8e1bdd2c-7e8e-445c-b2ea-b71516140a59
+  displayName: Unarmed
+  description: Fist attack. Like a man!
+  icon: {fileID: 0}
+  pickup: {fileID: 0}
+  stackable: 0
+  allowedEquipLocation: 5
   equipedPrefab: {fileID: 50943672280984630, guid: 04df4a02c64b14f43af7c2fb8f9048f0, type: 3}
   _animatorOveride: {fileID: 0}
   weaponRange: 2

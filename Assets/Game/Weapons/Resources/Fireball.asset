@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b438989a08431cafd45364a7646676, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
+  itemID: b40818f2-d65d-4ac5-8359-88ebda6d525c
+  displayName: Fireball
+  description: What a nice power?
+  icon: {fileID: 21300000, guid: aba0f700d91d4fc4fa8c724899ab04ab, type: 3}
+  pickup: {fileID: 2020895319945898815, guid: f08db123d4ffc55409dd1a6cb434a20b, type: 3}
+  stackable: 0
+  allowedEquipLocation: 5
   equipedPrefab: {fileID: 0}
   _animatorOveride: {fileID: 22100000, guid: c130bf5e962e1b041b7f1202631cd022, type: 2}
   weaponRange: 8
   weaponDamage: 15
+  percentageModifier: 0
   isRightHanded: 0
   projectilePrefab: {fileID: 9063494823209679919, guid: f3836dfb0e8f4ea43bc1f9a2b3719d60, type: 3}

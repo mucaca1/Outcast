@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using RPG.Saving;
+using GameDevTV.Saving;
 using UnityEngine;
 
 namespace Outcast.SceneManagement {
@@ -42,7 +42,7 @@ namespace Outcast.SceneManagement {
         }
 
         public void Load() {
-            GetComponent<SavingSystem>().Load(defaultSaveFile);
+            StartCoroutine(GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile));
         }
     }
 }

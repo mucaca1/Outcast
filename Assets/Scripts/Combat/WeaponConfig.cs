@@ -1,14 +1,17 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using GameDevTV.Inventories;
 using Outcast.Core;
 using Outcast.Attributes;
+using Outcast.Stats;
 using UnityEngine;
 
 namespace Outcast.Combat {
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Create new weapon", order = 0)]
-    public class WeaponConfig : ScriptableObject {
+    public class WeaponConfig : EquipableItem, IModifierProvider {
         [SerializeField] private Weapon equipedPrefab = null;
         [SerializeField] private AnimatorOverrideController _animatorOveride;
-
+        [SerializeField] float percentageBonus = 0;
         [SerializeField] private float weaponRange = 2f;
         [SerializeField] private float weaponDamage = 5f;
         [SerializeField] private float percentageModifier = 0f;
@@ -66,6 +69,20 @@ namespace Outcast.Combat {
 
         private Transform GetHand(Transform rightHand, Transform leftHand) {
             return isRightHanded ? rightHand : leftHand;
+        }
+
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat) {
+            if (stat == Stat.Damage)
+            {
+                yield return weaponDamage;
+            }
+        }
+
+        public IEnumerable<float> GetPercentageModifiers(Stat stat) {
+            if (stat == Stat.Damage)
+            {
+                yield return percentageBonus;
+            }
         }
     }
 }

@@ -4,6 +4,7 @@
         Move,
         Combat,
         UI,
-        Pickup
+        Pickup,
+        FullPickup
     }
 }
