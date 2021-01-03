@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 namespace Dialogue.Editor {
@@ -7,6 +8,16 @@ namespace Dialogue.Editor {
         [MenuItem("Window/Dialogue Editor")]
         public static void ShowDialogueEditor() {
             GetWindow(typeof(DialogueEditor), false, "Dialogue Editor");
+        }
+
+        [OnOpenAssetAttribute(1)]
+        public static bool OnOpenAsset(int instanceID, int line) {
+            Dialogue dialogue = EditorUtility.InstanceIDToObject(instanceID) as Dialogue;
+            if (dialogue != null) {
+                ShowDialogueEditor();
+                return true;
+            }
+            return false;
         }
     }
 }
