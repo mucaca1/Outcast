@@ -56,7 +56,19 @@ MonoBehaviour:
     texture: {fileID: 2800000, guid: f8c873f1e53e83f4aabf342d6be1dfc3, type: 3}
     hotspot: {x: 0, y: 0}
   maxNavMeshProjectionDistance: 1
-  maxPathLength: 20
+--- !u!114 &7557297407593611786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9004551768240337548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19fc28a888c18ce4a82d521912c49df1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySize: 8
 --- !u!1001 &3455022202934645250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,6 +144,10 @@ PrefabInstance:
       propertyPath: rightHandTransform
       value: 
       objectReference: {fileID: 5748055951924262895}
+    - target: {fileID: 3677631466977700781, guid: 1a557cd609840f140819573f9b12e7f8, type: 3}
+      propertyPath: defaultWeaponConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a5df04ff2eef5845be369f1779507c9, type: 2}
     - target: {fileID: 5495542873054155802, guid: 1a557cd609840f140819573f9b12e7f8, type: 3}
       propertyPath: health
       value: 50
@@ -148,6 +164,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6796775166169251251, guid: 1a557cd609840f140819573f9b12e7f8, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7990305117829074833, guid: 1a557cd609840f140819573f9b12e7f8, type: 3}
       propertyPath: shouldUseModifiers
       value: 1
@@ -156,6 +176,10 @@ PrefabInstance:
       propertyPath: levelUpParticleEffectPrefab
       value: 
       objectReference: {fileID: 4008987002792956798, guid: 6567b534173703e46b1d5a3bc2cb12eb, type: 3}
+    - target: {fileID: 8780988765931258269, guid: 1a557cd609840f140819573f9b12e7f8, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a557cd609840f140819573f9b12e7f8, type: 3}
 --- !u!1 &9004551768240337548 stripped
