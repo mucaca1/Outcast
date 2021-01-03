@@ -14,8 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nodes:
   - uniqueID: a
-    content: Ahoj
+    text: Ako sa mas
+    children:
+    - b
+    - c
+    rect:
+      serializedVersion: 2
+      x: 456
+      y: 278
+      width: 200
+      height: 200
   - uniqueID: b
-    content: Jako?
+    text: Dobre
+    children: []
+    rect:
+      serializedVersion: 2
+      x: 105
+      y: 183
+      width: 200
+      height: 200
   - uniqueID: c
-    content: Dobre
+    text: Najlepsie
+    children: []
+    rect:
+      serializedVersion: 2
+      x: 416
+      y: 41
+      width: 200
+      height: 200
