@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
@@ -18,6 +19,12 @@ namespace Dialogue.Editor {
                 return true;
             }
             return false;
+        }
+
+        private void OnGUI() {
+            EditorGUILayout.LabelField("Hello world");
+            EditorGUILayout.LabelField("Ahoj svet");
+            EditorGUILayout.LabelField("Nazdar světe");
         }
     }
 }
