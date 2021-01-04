@@ -52,7 +52,8 @@ namespace Dialogue.Editor {
                 ProcessEvents();
                 EditorGUILayout.LabelField(_selectedDialogue.name);
                 foreach (DialogueNode node in _selectedDialogue.GetAllNodes()) {
-                    OnGUINode(node);
+                    DrawNode(node);
+                    DrawConnections(node);
                 }
             }
         }
@@ -74,7 +75,7 @@ namespace Dialogue.Editor {
             }
         }
 
-        private void OnGUINode(DialogueNode node) {
+        private void DrawNode(DialogueNode node) {
             GUILayout.BeginArea(node.rect, _nodeStyle);
             EditorGUILayout.LabelField("Node:", EditorStyles.whiteLabel);
             EditorGUI.BeginChangeCheck();
@@ -91,6 +92,17 @@ namespace Dialogue.Editor {
             }
 
             GUILayout.EndArea();
+        }
+        
+        private void DrawConnections(DialogueNode node) {
+            Vector3 startPosition = new Vector2(node.rect.xMax, node.rect.center.y);
+            foreach (DialogueNode children in _selectedDialogue.GetAllChildren(node)) {
+                Vector3 endPosition = new Vector2(children.rect.xMin, children.rect.center.y);
+                Vector3 controlPointOffset = endPosition - startPosition;
+                controlPointOffset.y = 0f;
+                controlPointOffset.x *= 0.8f;
+                Handles.DrawBezier(startPosition, endPosition, startPosition + controlPointOffset, endPosition - controlPointOffset, Color.white, null, 4f);
+            }
         }
         
         private DialogueNode GetNodeAtPoint(Vector2 point) {
