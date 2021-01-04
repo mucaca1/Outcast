@@ -6,7 +6,7 @@ namespace Dialogue {
     [CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue", order = 0)]
     public class Dialogue : ScriptableObject {
         [SerializeField]
-        private List<DialogueNode> _nodes;
+        private List<DialogueNode> _nodes = new List<DialogueNode>();
 
         private Dictionary<string, DialogueNode> _nodeLookup = new Dictionary<string, DialogueNode>();
 
@@ -14,7 +14,7 @@ namespace Dialogue {
         private void Awake() {
             if (_nodes == null || _nodes.Count == 0) {
                 _nodes = new List<DialogueNode>();
-                _nodes.Add(new DialogueNode());
+                _nodes.Add(CreateNewNode());
             }
             OnValidate();
         }
@@ -41,6 +41,19 @@ namespace Dialogue {
                     yield return _nodeLookup[childId];
                 }
             }
+        }
+
+        public void CreateNode(DialogueNode parent) {
+            DialogueNode newNode = CreateNewNode();
+            _nodes.Add(newNode);
+            parent.children.Add(newNode.uniqueID);
+            OnValidate();
+        }
+
+        private DialogueNode CreateNewNode() {
+            DialogueNode newNode = new DialogueNode();
+            newNode.uniqueID = Guid.NewGuid().ToString();
+            return newNode;
         }
     }
 }

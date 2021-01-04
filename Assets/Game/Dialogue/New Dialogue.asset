@@ -13,32 +13,12 @@ MonoBehaviour:
   m_Name: New Dialogue
   m_EditorClassIdentifier: 
   _nodes:
-  - uniqueID: a
-    text: Ako sa mas
-    children:
-    - b
-    - c
-    rect:
-      serializedVersion: 2
-      x: 456
-      y: 278
-      width: 200
-      height: 200
-  - uniqueID: b
-    text: Dobre
+  - uniqueID: d91a940e-9cf9-4236-8400-1d45519e928c
+    text: 
     children: []
     rect:
       serializedVersion: 2
-      x: 105
-      y: 183
+      x: 100
+      y: 50
       width: 200
-      height: 200
-  - uniqueID: c
-    text: Najlepsie
-    children: []
-    rect:
-      serializedVersion: 2
-      x: 416
-      y: 41
-      width: 200
-      height: 200
+      height: 130

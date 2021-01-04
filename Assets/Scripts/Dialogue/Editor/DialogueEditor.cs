@@ -5,9 +5,14 @@ using UnityEngine;
 
 namespace Dialogue.Editor {
     public class DialogueEditor : EditorWindow {
+        [NonReorderable]
         private Dialogue _selectedDialogue = null;
+        [NonReorderable]
         private GUIStyle _nodeStyle;
+        [NonReorderable]
         private DialogueNode _draggingNode = null;
+        [NonReorderable]
+        private DialogueNode _creatingNode = null;
 
         private Vector2 _draggingOffset;
 
@@ -55,6 +60,12 @@ namespace Dialogue.Editor {
                     DrawNode(node);
                     DrawConnections(node);
                 }
+
+                if (_creatingNode != null) {
+                    Undo.RecordObject(_selectedDialogue, "Add New Node");
+                    _selectedDialogue.CreateNode(_creatingNode);
+                    _creatingNode = null;
+                }
             }
         }
 
@@ -79,16 +90,15 @@ namespace Dialogue.Editor {
             GUILayout.BeginArea(node.rect, _nodeStyle);
             EditorGUILayout.LabelField("Node:", EditorStyles.whiteLabel);
             EditorGUI.BeginChangeCheck();
-            string newId = EditorGUILayout.TextField(node.uniqueID);
+            EditorGUILayout.LabelField(node.uniqueID);
             string newText = EditorGUILayout.TextField(node.text);
             if (EditorGUI.EndChangeCheck()) {
                 Undo.RecordObject(_selectedDialogue, "Update Dialogue Text");
-                node.uniqueID = newId;
                 node.text = newText;
             }
 
-            foreach (DialogueNode childrenNode in _selectedDialogue.GetAllChildren(node)) {
-                EditorGUILayout.LabelField(childrenNode.text);
+            if (GUILayout.Button("+")) {
+                _creatingNode = node;
             }
 
             GUILayout.EndArea();
