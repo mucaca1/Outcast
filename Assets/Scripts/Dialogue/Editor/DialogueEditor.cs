@@ -7,12 +7,13 @@ namespace Dialogue.Editor {
     public class DialogueEditor : EditorWindow {
         [NonSerialized] private Dialogue _selectedDialogue = null;
         [NonSerialized] private GUIStyle _nodeStyle;
+        [NonSerialized] private GUIStyle _playerNodeStyle;
         [NonSerialized] private DialogueNode _draggingNode = null;
         [NonSerialized] private DialogueNode _creatingNode = null;
         [NonSerialized] private DialogueNode _nodeToDelete = null;
 
         [NonSerialized] private DialogueNode _linkingParentNode = null;
-        
+
         private Vector2 _scrollPosition = new Vector2(0, 0);
 
         [NonSerialized] private bool _draggingCanvas = false;
@@ -45,6 +46,11 @@ namespace Dialogue.Editor {
             _nodeStyle.normal.background = EditorGUIUtility.Load("node0") as Texture2D;
             _nodeStyle.padding = new RectOffset(20, 20, 20, 20);
             _nodeStyle.border = new RectOffset(12, 12, 12, 12);
+
+            _playerNodeStyle = new GUIStyle();
+            _playerNodeStyle.normal.background = EditorGUIUtility.Load("node1") as Texture2D;
+            _playerNodeStyle.padding = new RectOffset(20, 20, 20, 20);
+            _playerNodeStyle.border = new RectOffset(12, 12, 12, 12);
         }
 
         private void OnSelectionChanged() {
@@ -66,13 +72,13 @@ namespace Dialogue.Editor {
                 Rect texCoords = new Rect(0, 0, _canvasSize / _backgroundSize, _canvasSize / _backgroundSize);
                 Texture2D background = Resources.Load("background") as Texture2D;
                 GUI.DrawTextureWithTexCoords(canvas, background, texCoords);
-                
+
                 EditorGUILayout.LabelField(_selectedDialogue.name);
                 foreach (DialogueNode node in _selectedDialogue.GetAllNodes()) {
                     DrawNode(node);
                     DrawConnections(node);
                 }
-                
+
                 EditorGUILayout.EndScrollView();
 
                 if (_creatingNode != null) {
@@ -117,7 +123,12 @@ namespace Dialogue.Editor {
         }
 
         private void DrawNode(DialogueNode node) {
-            GUILayout.BeginArea(node.GetRect(), _nodeStyle);
+            GUIStyle style = _nodeStyle;
+            if (node.IsPlayerSpeaking()) {
+                style = _playerNodeStyle;
+            }
+
+            GUILayout.BeginArea(node.GetRect(), style);
             EditorGUILayout.LabelField("Node:", EditorStyles.whiteLabel);
 
             EditorGUILayout.LabelField(node.name);

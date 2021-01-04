@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 
 namespace Dialogue {
     public class DialogueNode : ScriptableObject {
+        [SerializeField] private bool isPlayerSpeaking = false;
         [SerializeField] private string text;
         [SerializeField] private List<string> children = new List<string>();
 
@@ -16,46 +17,57 @@ namespace Dialogue {
             return text;
         }
 
-#if UNITY_EDITOR
-        public void SetText(string text) {
-            if (text != this.text) {
-                Undo.RecordObject(this, "Change text");
-                this.text = text;
-            }
-        }
-#endif
-
         public List<string> GetChildrens() {
             return children;
         }
 
+        public Rect GetRect() {
+            return rect;
+        }
+
+        public bool IsPlayerSpeaking() {
+            return isPlayerSpeaking;
+        }
+
 #if UNITY_EDITOR
+        
+        public void SetPlayerSpeaking(bool isPlayerSpeaking) {
+            Undo.RecordObject(this, "Change PlayerSpeaking");
+            this.isPlayerSpeaking = isPlayerSpeaking;
+            EditorUtility.SetDirty(this);
+        }
+        
+        public void SetText(string text) {
+            if (text != this.text) {
+                Undo.RecordObject(this, "Change text");
+                this.text = text;
+                EditorUtility.SetDirty(this);
+            }
+        }
+
         public void AddChildren(string childUniqueId) {
             Undo.RecordObject(this, "Add Children");
             children.Add(childUniqueId);
+            EditorUtility.SetDirty(this);
         }
 
         public void RemoveChildren(string childUniqueId) {
             Undo.RecordObject(this, "Remove Children");
             children.Remove(childUniqueId);
+            EditorUtility.SetDirty(this);
         }
-
-#endif
-        public Rect GetRect() {
-            return rect;
-        }
-
-#if UNITY_EDITOR
 
         public void SetPosition(Vector2 position) {
             Undo.RecordObject(this, "Change Position");
             rect.position = position;
+            EditorUtility.SetDirty(this);
         }
 
         public void SetRect(Rect rect) {
             Undo.RecordObject(this, "Move");
             this.rect = rect;
+            EditorUtility.SetDirty(this);
         }
-    }
 #endif
+    }
 }

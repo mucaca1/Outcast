@@ -43,9 +43,11 @@ namespace Dialogue {
         public void CreateNode(DialogueNode parent) {
             var newNode = MakeNode(parent);
 
+            newNode.SetPlayerSpeaking(!parent.IsPlayerSpeaking());
+            newNode.SetPosition(parent.GetRect().position + new Vector2(parent.GetRect().width + 10, 0));
             Undo.RegisterCreatedObjectUndo(newNode, "Create New Node");
             Undo.RecordObject(this, "Add New Node");
-            
+
             AddNode(newNode);
         }
 
