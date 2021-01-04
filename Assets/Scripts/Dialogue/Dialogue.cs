@@ -55,5 +55,17 @@ namespace Dialogue {
             newNode.uniqueID = Guid.NewGuid().ToString();
             return newNode;
         }
+
+        public void DeleteNode(DialogueNode nodeToDelete) {
+            _nodes.Remove(nodeToDelete);
+            OnValidate();
+            CleanDanglingChildren(nodeToDelete);
+        }
+
+        private void CleanDanglingChildren(DialogueNode nodeToDelete) {
+            foreach (DialogueNode node in GetAllNodes()) {
+                node.children.Remove(nodeToDelete.uniqueID);
+            }
+        }
     }
 }

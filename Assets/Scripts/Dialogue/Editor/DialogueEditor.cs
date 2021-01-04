@@ -5,14 +5,13 @@ using UnityEngine;
 
 namespace Dialogue.Editor {
     public class DialogueEditor : EditorWindow {
-        [NonReorderable]
-        private Dialogue _selectedDialogue = null;
-        [NonReorderable]
-        private GUIStyle _nodeStyle;
-        [NonReorderable]
-        private DialogueNode _draggingNode = null;
-        [NonReorderable]
-        private DialogueNode _creatingNode = null;
+        [NonSerialized] private Dialogue _selectedDialogue = null;
+        [NonSerialized] private GUIStyle _nodeStyle;
+        [NonSerialized] private DialogueNode _draggingNode = null;
+        [NonSerialized] private DialogueNode _creatingNode = null;
+        [NonSerialized] private DialogueNode _nodeToDelete = null;
+
+        [NonSerialized] private DialogueNode _linkingParentNode = null;
 
         private Vector2 _draggingOffset;
 
@@ -66,6 +65,12 @@ namespace Dialogue.Editor {
                     _selectedDialogue.CreateNode(_creatingNode);
                     _creatingNode = null;
                 }
+
+                if (_nodeToDelete != null) {
+                    Undo.RecordObject(_selectedDialogue, "Delete Node");
+                    _selectedDialogue.DeleteNode(_nodeToDelete);
+                    _nodeToDelete = null;
+                }
             }
         }
 
@@ -97,13 +102,49 @@ namespace Dialogue.Editor {
                 node.text = newText;
             }
 
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("x")) {
+                _nodeToDelete = node;
+            }
+
+            DrawLinkButtons(node);
+
             if (GUILayout.Button("+")) {
                 _creatingNode = node;
             }
 
+            GUILayout.EndHorizontal();
+
             GUILayout.EndArea();
         }
-        
+
+        private void DrawLinkButtons(DialogueNode node) {
+            if (_linkingParentNode == null) {
+                if (GUILayout.Button("link")) {
+                    _linkingParentNode = node;
+                }
+            }
+            else if (_linkingParentNode == node) {
+                if (GUILayout.Button("cancel")) {
+                    _linkingParentNode = null;
+                }
+            }
+            else if (_linkingParentNode.children.Contains(node.uniqueID)) {
+                if (GUILayout.Button("unlink")) {
+                    Undo.RecordObject(_selectedDialogue, "Delete nodes connection");
+                    _linkingParentNode.children.Remove(node.uniqueID);
+                    _linkingParentNode = null;
+                }
+            }
+            else {
+                if (GUILayout.Button("child")) {
+                    Undo.RecordObject(_selectedDialogue, "Connect nodes");
+                    _linkingParentNode.children.Add(node.uniqueID);
+                    _linkingParentNode = null;
+                }
+            }
+        }
+
         private void DrawConnections(DialogueNode node) {
             Vector3 startPosition = new Vector2(node.rect.xMax, node.rect.center.y);
             foreach (DialogueNode children in _selectedDialogue.GetAllChildren(node)) {
@@ -111,10 +152,11 @@ namespace Dialogue.Editor {
                 Vector3 controlPointOffset = endPosition - startPosition;
                 controlPointOffset.y = 0f;
                 controlPointOffset.x *= 0.8f;
-                Handles.DrawBezier(startPosition, endPosition, startPosition + controlPointOffset, endPosition - controlPointOffset, Color.white, null, 4f);
+                Handles.DrawBezier(startPosition, endPosition, startPosition + controlPointOffset,
+                    endPosition - controlPointOffset, Color.white, null, 4f);
             }
         }
-        
+
         private DialogueNode GetNodeAtPoint(Vector2 point) {
             DialogueNode returnValue = null;
             foreach (DialogueNode node in _selectedDialogue.GetAllNodes()) {
