@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: New Dialogue
   m_EditorClassIdentifier: 
   _nodes:
-  - uniqueID: 7a8581a4-6d2d-4938-a86f-92055f7c47c5
+  - uniqueID: 980706ff-a101-4128-934e-631620cd8451
     text: 
     children: []
     rect:

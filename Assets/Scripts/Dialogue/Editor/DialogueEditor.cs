@@ -12,6 +12,8 @@ namespace Dialogue.Editor {
         [NonSerialized] private DialogueNode _nodeToDelete = null;
 
         [NonSerialized] private DialogueNode _linkingParentNode = null;
+        
+        private Vector2 _scrollPosition = new Vector2(0, 0);
 
         private Vector2 _draggingOffset;
 
@@ -53,12 +55,18 @@ namespace Dialogue.Editor {
                 EditorGUILayout.LabelField("No Dialogue selected.");
             }
             else {
+                _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
+                Debug.Log(_scrollPosition);
+                GUILayoutUtility.GetRect(1000, 1000);
+                
                 ProcessEvents();
                 EditorGUILayout.LabelField(_selectedDialogue.name);
                 foreach (DialogueNode node in _selectedDialogue.GetAllNodes()) {
                     DrawNode(node);
                     DrawConnections(node);
                 }
+                
+                EditorGUILayout.EndScrollView();
 
                 if (_creatingNode != null) {
                     Undo.RecordObject(_selectedDialogue, "Add New Node");
