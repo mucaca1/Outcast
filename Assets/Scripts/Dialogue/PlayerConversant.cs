@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Control;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,12 +10,14 @@ namespace Dialogue {
     public class PlayerConversant : MonoBehaviour {
         private Dialogue _currentDialogue;
         private DialogueNode _currentNode = null;
+        private AIConversant currentConversant = null;
 
         private bool _isChoosing = false;
 
         public event Action ONConversationUpdated;
 
-        public void StartDialogue(Dialogue newDialogue) {
+        public void StartDialogue(AIConversant newConversant, Dialogue newDialogue) {
+            currentConversant = newConversant;
             _currentDialogue = newDialogue;
             _currentNode = _currentDialogue.GetRootNode();
             TriggerEnterAction();
@@ -45,10 +48,11 @@ namespace Dialogue {
         }
 
         public void Quit() {
+            TriggerExitAction();
             _currentDialogue = null;
             _currentNode = null;
             _isChoosing = false;
-            TriggerExitAction();
+            currentConversant = null;
             ONConversationUpdated();
         }
 
@@ -81,14 +85,22 @@ namespace Dialogue {
         }
 
         private void TriggerEnterAction() {
-            if (_currentNode != null && _currentNode.GetOnEnterAction() != "") {
-                Debug.Log(_currentNode.GetOnEnterAction());
+            if (_currentNode != null) {
+                TriggerAction(_currentNode.GetOnEnterAction());
             }
         }
 
         private void TriggerExitAction() {
-            if (_currentNode != null && _currentNode.GetOnExitAction() != "") {
-                Debug.Log(_currentNode.GetOnExitAction());
+            if (_currentNode != null) {
+                TriggerAction(_currentNode.GetOnExitAction());
+            }
+        }
+
+        private void TriggerAction(string action) {
+            if (action == "") return;
+
+            foreach (var trigger in currentConversant.GetComponents<DialogueTrigger>()) {
+                trigger.Trigger(action);
             }
         }
     }

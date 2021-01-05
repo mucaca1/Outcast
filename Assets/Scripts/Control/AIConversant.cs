@@ -13,7 +13,7 @@ namespace Control {
         public bool HandleRaycast(PlayerController controller) {
             if (_dialogue == null) return false;
             if (Input.GetMouseButtonDown(0)) {
-                controller.GetComponent<PlayerConversant>().StartDialogue(_dialogue);
+                controller.GetComponent<PlayerConversant>().StartDialogue(this, _dialogue);
             }
             return true;
         }

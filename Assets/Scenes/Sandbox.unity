@@ -3077,6 +3077,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 99a4552e6315c3f46988033cadc41eeb, type: 2}
+--- !u!114 &1044739306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044739304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93451b1e1365492794c8cb759d13ef4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: Attack
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1044739315}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &1044739315 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7432560837713223499, guid: 63c073cf4960ec349ba8601818b23f00, type: 3}
+  m_PrefabInstance: {fileID: 1380052710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044739304}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f856fb9c7f28842bc7457856704687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1137057152
 GameObject:
   m_ObjectHideFlags: 3
@@ -3327,7 +3366,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252121553}
-  m_LocalRotation: {x: 0.10866775, y: -0.035371333, z: 0.0038691, w: 0.9934411}
+  m_LocalRotation: {x: 0.10866773, y: -0.035371296, z: 0.0038690958, w: 0.9934411}
   m_LocalPosition: {x: 13.064568, y: -0.486156, z: 7.4592295}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5692,7 +5731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 539710690932302301, guid: ec0ee14501684b640b2fac1f51ae9a86, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -558.9292
+      value: -570.75006
       objectReference: {fileID: 0}
     - target: {fileID: 539922363453714499, guid: ec0ee14501684b640b2fac1f51ae9a86, type: 3}
       propertyPath: m_AnchoredPosition.y
