@@ -13,19 +13,18 @@ namespace Outcast.UI {
         [SerializeField] private Transform choiceRoot;
         [SerializeField] private GameObject choicePrefab;
         [SerializeField] private GameObject AIResponse;
+        [SerializeField] private Button quitutton;
 
         private void Start() {
             _playerConversant = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConversant>();
-            nextButton.onClick.AddListener(Next);
-            UpdateUI();
-        }
-
-        private void Next() {
-            _playerConversant.Next();
+            _playerConversant.ONConversationUpdated += UpdateUI;
+            nextButton.onClick.AddListener(() => _playerConversant.Next());
+            quitutton.onClick.AddListener(() => _playerConversant.Quit());
             UpdateUI();
         }
 
         private void UpdateUI() {
+            if (!_playerConversant.IsActive()) return;
             AIResponse.SetActive(!_playerConversant.IsChoosing());
             choiceRoot.gameObject.SetActive(_playerConversant.IsChoosing());
 
@@ -50,7 +49,6 @@ namespace Outcast.UI {
                 Button button = choiceButton.GetComponentInChildren<Button>();
                 button.onClick.AddListener(() => {
                     _playerConversant.SelectChoice(choice);
-                    UpdateUI();
                 });
             }
         }
