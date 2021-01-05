@@ -22,6 +22,27 @@ MonoBehaviour:
     y: 308
     width: 200
     height: 130
+--- !u!114 &-7138492992427406875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b74b59577ec4fbba811bc8057fad9a4, type: 3}
+  m_Name: 1013e46f-9621-4cf3-a022-e9cfcc8fef3c
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  text: ...but
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 789
+    y: 444
+    width: 200
+    height: 130
 --- !u!114 &-6746982085188257079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39,10 +60,33 @@ MonoBehaviour:
   children:
   - 6728fca5-453c-48c4-bcee-df68591afef2
   - ae5db9ba-c07b-4593-9d06-f09a98133fe4
+  - fdf12896-b014-46af-b4e3-b1e382822cfa
   rect:
     serializedVersion: 2
     x: 83
     y: 167
+    width: 200
+    height: 130
+--- !u!114 &-2327104353227292293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b74b59577ec4fbba811bc8057fad9a4, type: 3}
+  m_Name: fdf12896-b014-46af-b4e3-b1e382822cfa
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  text: Wohooo
+  children:
+  - cc16e5f3-b274-4923-8532-024a29883bbc
+  rect:
+    serializedVersion: 2
+    x: 369
+    y: 444
     width: 200
     height: 130
 --- !u!114 &-2196002779364718367
@@ -58,12 +102,34 @@ MonoBehaviour:
   m_Name: 66b7ed0b-2509-4c70-a8c8-0526303b88a7
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
-  text: Ohohooo big daddy
+  text: Whaaat?
   children: []
   rect:
     serializedVersion: 2
     x: 580
-    y: 309
+    y: 308
+    width: 200
+    height: 130
+--- !u!114 &-335871763807331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b74b59577ec4fbba811bc8057fad9a4, type: 3}
+  m_Name: cc16e5f3-b274-4923-8532-024a29883bbc
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  text: Ok
+  children:
+  - 1013e46f-9621-4cf3-a022-e9cfcc8fef3c
+  rect:
+    serializedVersion: 2
+    x: 579
+    y: 444
     width: 200
     height: 130
 --- !u!114 &11400000
@@ -84,6 +150,9 @@ MonoBehaviour:
   - {fileID: -8164623056641559373}
   - {fileID: 3635305887492037751}
   - {fileID: -2196002779364718367}
+  - {fileID: -2327104353227292293}
+  - {fileID: -335871763807331}
+  - {fileID: -7138492992427406875}
 --- !u!114 &157873838987564400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +188,7 @@ MonoBehaviour:
   m_Name: 1f60c77d-d94a-4cd9-92e9-13f406264cde
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
-  text: Aaaa nice boy
+  text: Pfff
   children: []
   rect:
     serializedVersion: 2
