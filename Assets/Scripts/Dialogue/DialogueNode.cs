@@ -13,6 +13,9 @@ namespace Dialogue {
 
         [SerializeField] private Rect rect = new Rect(100, 50, 200, 130);
 
+        [SerializeField] private string onEnterAction;
+        [SerializeField] private string onExitAction;
+
         public string GetText() {
             return text;
         }
@@ -27,6 +30,14 @@ namespace Dialogue {
 
         public bool IsPlayerSpeaking() {
             return isPlayerSpeaking;
+        }
+
+        public string GetOnEnterAction() {
+            return onEnterAction;
+        }
+        
+        public string GetOnExitAction() {
+            return onExitAction;
         }
 
 #if UNITY_EDITOR

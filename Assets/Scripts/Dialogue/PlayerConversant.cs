@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 namespace Dialogue {
     public class PlayerConversant : MonoBehaviour {
-        [SerializeField] private Dialogue testDialogue;
         private Dialogue _currentDialogue;
         private DialogueNode _currentNode = null;
 
@@ -15,14 +14,10 @@ namespace Dialogue {
 
         public event Action ONConversationUpdated;
 
-        private IEnumerator Start() {
-            yield return new WaitForSeconds(4);
-            StartDialogue(testDialogue);
-        }
-
         public void StartDialogue(Dialogue newDialogue) {
             _currentDialogue = newDialogue;
             _currentNode = _currentDialogue.GetRootNode();
+            TriggerEnterAction();
             ONConversationUpdated();
         }
 
@@ -40,6 +35,7 @@ namespace Dialogue {
 
         public void SelectChoice(DialogueNode chosenNode) {
             _currentNode = chosenNode;
+            TriggerEnterAction();
             _isChoosing = false;
             Next();
         }
@@ -52,6 +48,7 @@ namespace Dialogue {
             _currentDialogue = null;
             _currentNode = null;
             _isChoosing = false;
+            TriggerExitAction();
             ONConversationUpdated();
         }
 
@@ -59,13 +56,19 @@ namespace Dialogue {
             int numPlayerResponsies = _currentDialogue.GetPlayerChildren(_currentNode).Count();
             if (numPlayerResponsies > 0) {
                 _isChoosing = true;
+                TriggerExitAction();
                 ONConversationUpdated();
                 return;
             }
 
             DialogueNode[] nodes = _currentDialogue.GetAIChildren(_currentNode).ToArray();
-            int randomIndex = Random.Range(0, nodes.Length);
-            _currentNode = nodes[randomIndex];
+            if (nodes.Length != 0) {
+                int randomIndex = Random.Range(0, nodes.Length);
+                TriggerExitAction();
+                _currentNode = nodes[randomIndex];
+                TriggerEnterAction();
+            }
+
             ONConversationUpdated();
         }
 
@@ -75,6 +78,18 @@ namespace Dialogue {
 
         public bool HasNext() {
             return _currentDialogue.GetAllChildren(_currentNode).Count() > 0;
+        }
+
+        private void TriggerEnterAction() {
+            if (_currentNode != null && _currentNode.GetOnEnterAction() != "") {
+                Debug.Log(_currentNode.GetOnEnterAction());
+            }
+        }
+
+        private void TriggerExitAction() {
+            if (_currentNode != null && _currentNode.GetOnExitAction() != "") {
+                Debug.Log(_currentNode.GetOnExitAction());
+            }
         }
     }
 }

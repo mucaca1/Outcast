@@ -22,6 +22,8 @@ MonoBehaviour:
     y: 308
     width: 200
     height: 130
+  onEnterAction: bad ans
+  onExitAction: 
 --- !u!114 &-7138492992427406875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,6 +45,8 @@ MonoBehaviour:
     y: 444
     width: 200
     height: 130
+  onEnterAction: 
+  onExitAction: 
 --- !u!114 &-6746982085188257079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +71,8 @@ MonoBehaviour:
     y: 167
     width: 200
     height: 130
+  onEnterAction: Start
+  onExitAction: You answer
 --- !u!114 &-2327104353227292293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,6 +95,8 @@ MonoBehaviour:
     y: 444
     width: 200
     height: 130
+  onEnterAction: Whoo ? Really ?
+  onExitAction: 
 --- !u!114 &-2196002779364718367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +118,8 @@ MonoBehaviour:
     y: 308
     width: 200
     height: 130
+  onEnterAction: 
+  onExitAction: 
 --- !u!114 &-335871763807331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +142,8 @@ MonoBehaviour:
     y: 444
     width: 200
     height: 130
+  onEnterAction: 
+  onExitAction: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +187,8 @@ MonoBehaviour:
     y: 54
     width: 200
     height: 130
+  onEnterAction: good ans
+  onExitAction: 
 --- !u!114 &3635305887492037751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,3 +210,5 @@ MonoBehaviour:
     y: 54
     width: 200
     height: 130
+  onEnterAction: 
+  onExitAction: 

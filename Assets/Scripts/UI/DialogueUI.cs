@@ -24,6 +24,7 @@ namespace Outcast.UI {
         }
 
         private void UpdateUI() {
+            gameObject.SetActive(_playerConversant.IsActive());
             if (!_playerConversant.IsActive()) return;
             AIResponse.SetActive(!_playerConversant.IsChoosing());
             choiceRoot.gameObject.SetActive(_playerConversant.IsChoosing());
