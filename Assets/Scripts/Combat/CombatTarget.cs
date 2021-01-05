@@ -11,6 +11,7 @@ namespace Outcast.Combat {
         }
 
         public bool HandleRaycast(PlayerController controller) {
+            if (!enabled) return false;
             if (!controller.GetComponent<Fighter>().CanAttack(gameObject)) return false;
 
             if (Input.GetMouseButton(0)) {
