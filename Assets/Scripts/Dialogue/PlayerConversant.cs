@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace Dialogue {
     public class PlayerConversant : MonoBehaviour {
+        [SerializeField] private string playerName;
         private Dialogue _currentDialogue;
         private DialogueNode _currentNode = null;
         private AIConversant currentConversant = null;
@@ -102,6 +103,14 @@ namespace Dialogue {
             foreach (var trigger in currentConversant.GetComponents<DialogueTrigger>()) {
                 trigger.Trigger(action);
             }
+        }
+
+        public string GetCurrentConversantName() {
+            if (_isChoosing) {
+                return playerName;
+            }
+
+            return currentConversant.GetName();
         }
     }
 }

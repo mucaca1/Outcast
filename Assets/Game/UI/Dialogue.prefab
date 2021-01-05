@@ -889,6 +889,7 @@ MonoBehaviour:
   choicePrefab: {fileID: 3481786865055196745, guid: d59e401c2cc0d9c4d9894a9ed6c56056, type: 3}
   AIResponse: {fileID: 5790630808275552487}
   quitutton: {fileID: 8737431009831331363}
+  conversantName: {fileID: 1151997204431225202}
 --- !u!1 &8299297302129386802
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee178a86c834daa95c196c3027bf04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testDialogue: {fileID: 11400000, guid: 99a4552e6315c3f46988033cadc41eeb, type: 2}
+  playerName: Matej
 --- !u!114 &2339465534020903012
 MonoBehaviour:
   m_ObjectHideFlags: 0

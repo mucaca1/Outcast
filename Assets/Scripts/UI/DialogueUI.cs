@@ -14,6 +14,7 @@ namespace Outcast.UI {
         [SerializeField] private GameObject choicePrefab;
         [SerializeField] private GameObject AIResponse;
         [SerializeField] private Button quitutton;
+        [SerializeField] private TextMeshProUGUI conversantName;
 
         private void Start() {
             _playerConversant = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConversant>();
@@ -26,6 +27,8 @@ namespace Outcast.UI {
         private void UpdateUI() {
             gameObject.SetActive(_playerConversant.IsActive());
             if (!_playerConversant.IsActive()) return;
+
+            conversantName.text = _playerConversant.GetCurrentConversantName();
             AIResponse.SetActive(!_playerConversant.IsChoosing());
             choiceRoot.gameObject.SetActive(_playerConversant.IsChoosing());
 
