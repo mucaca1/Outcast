@@ -9,11 +9,15 @@ namespace Outcast.UI.Quests {
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private Transform objectiveContainer;
         [SerializeField] private GameObject objectivePrefab;
-        public void Setup(Quest quest) {
-            title.text = quest.GetTitle();
+        [SerializeField] private GameObject objectiveIncompletedPrefab;
+        public void Setup(QuestStatus status) {
+            title.text = status.GetQuest().GetTitle();
             objectiveContainer.DetachChildren();
-            foreach (string objective in quest.GetObjectives()) {
-                GameObject objectiveInstance = Instantiate(objectivePrefab, objectiveContainer);
+            foreach (string objective in status.GetQuest().GetObjectives()) {
+                GameObject prefab = status.IsObjectiveComplete(objective)
+                    ? objectivePrefab
+                    : objectiveIncompletedPrefab;
+                GameObject objectiveInstance = Instantiate(prefab, objectiveContainer);
                 TextMeshProUGUI text = objectiveInstance.GetComponentInChildren<TextMeshProUGUI>();
                 text.text = objective;
             }

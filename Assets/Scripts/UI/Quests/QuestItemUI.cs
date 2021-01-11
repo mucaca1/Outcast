@@ -7,15 +7,15 @@ public class QuestItemUI : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private TextMeshProUGUI progress;
 
-    private Quest _quest;
+    private QuestStatus _questStatus;
     
-    public void Setup(Quest quest) {
-        _quest = quest;
-        title.text = quest.GetTitle();
-        progress.text = "0/" + quest.GetObjectiveCount();
+    public void Setup(QuestStatus status) {
+        _questStatus = status;
+        title.text = status.GetQuest().GetTitle();
+        progress.text = status.GetCompletedQuestCount() + "/" + status.GetQuest().GetObjectiveCount();
     }
 
-    public Quest GetQuest() {
-        return _quest;
+    public QuestStatus GetQuestStatus() {
+        return _questStatus;
     }
 }
