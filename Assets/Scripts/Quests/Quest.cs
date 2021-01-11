@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Outcast.Quests {
     [CreateAssetMenu(fileName = "New Quest", menuName = "Outcast/Quest", order = 0)]
@@ -12,6 +13,10 @@ namespace Outcast.Quests {
 
         public int GetObjectiveCount() {
             return objectives.Length;
+        }
+
+        public IEnumerable<string> GetObjectives() {
+            return objectives;
         }
     }
 }
