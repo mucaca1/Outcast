@@ -20,6 +20,13 @@ namespace Outcast.Quests {
 
         public bool IsObjectiveComplete(string objective) {
             return completedObjectives.Contains(objective);
-        } 
+        }
+
+        public void CompleteObjective(string objective) {
+            if (quest.HasObjective(objective)) {
+                completedObjectives.Add(objective);
+            }
+            
+        }
     }
 }

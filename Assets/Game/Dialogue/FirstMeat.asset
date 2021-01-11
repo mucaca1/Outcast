@@ -24,29 +24,6 @@ MonoBehaviour:
     height: 130
   onEnterAction: bad ans
   onExitAction: 
---- !u!114 &-7138492992427406875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b74b59577ec4fbba811bc8057fad9a4, type: 3}
-  m_Name: 1013e46f-9621-4cf3-a022-e9cfcc8fef3c
-  m_EditorClassIdentifier: 
-  isPlayerSpeaking: 1
-  text: ...but
-  children: []
-  rect:
-    serializedVersion: 2
-    x: 789
-    y: 444
-    width: 200
-    height: 130
-  onEnterAction: 
-  onExitAction: 
 --- !u!114 &-6746982085188257079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,8 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
   text: Ok
-  children:
-  - 1013e46f-9621-4cf3-a022-e9cfcc8fef3c
+  children: []
   rect:
     serializedVersion: 2
     x: 579
@@ -143,7 +119,7 @@ MonoBehaviour:
     width: 200
     height: 130
   onEnterAction: 
-  onExitAction: 
+  onExitAction: TestObjective
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +140,6 @@ MonoBehaviour:
   - {fileID: -2196002779364718367}
   - {fileID: -2327104353227292293}
   - {fileID: -335871763807331}
-  - {fileID: -7138492992427406875}
 --- !u!114 &157873838987564400
 MonoBehaviour:
   m_ObjectHideFlags: 0

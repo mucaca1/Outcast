@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Outcast.Quests {
     [CreateAssetMenu(fileName = "New Quest", menuName = "Outcast/Quest", order = 0)]
     public class Quest : ScriptableObject {
-        [SerializeField] private string[] objectives;
+        [SerializeField] private List<string> objectives = new List<string>();
 
 
         public string GetTitle() {
@@ -12,11 +12,15 @@ namespace Outcast.Quests {
         }
 
         public int GetObjectiveCount() {
-            return objectives.Length;
+            return objectives.Count;
         }
 
         public IEnumerable<string> GetObjectives() {
             return objectives;
+        }
+
+        public bool HasObjective(string objective) {
+            return objectives.Contains(objective);
         }
     }
 }
