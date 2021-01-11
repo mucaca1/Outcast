@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameDevTV.Saving;
 using UnityEngine;
 
 namespace Outcast.Quests {
     
-    public class QuestList : MonoBehaviour {
+    public class QuestList : MonoBehaviour, ISaveable {
         [SerializeField] private List<QuestStatus> statuses = new List<QuestStatus>();
 
         public event Action ONUpdate;
@@ -39,6 +40,25 @@ namespace Outcast.Quests {
             }
 
             return null;
+        }
+
+        public object CaptureState() {
+            List<object> state = new List<object>();
+            foreach (var statuse in statuses) {
+                state.Add(statuse.CaptureState());
+            }
+
+            return state;
+        }
+
+        public void RestoreState(object state) {
+            List<object> stateList = state as List<object>;
+            if (state == null) return;
+
+            statuses.Clear();
+            foreach (object objectState in stateList) {
+                statuses.Add(new QuestStatus(objectState));
+            }
         }
     }
 }

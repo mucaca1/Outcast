@@ -7,9 +7,23 @@ namespace Outcast.Quests {
         [SerializeField] private Quest quest;
         [SerializeField] private List<string> completedObjectives = new List<string>();
 
+        [System.Serializable]
+        class QuestStatusRecord {
+            public string questName;
+            public List<string> completedObjectives;
+        }
+
         public QuestStatus(Quest quest) {
             this.quest = quest;
         }
+
+        public QuestStatus(object quest) {
+            QuestStatusRecord record = quest as QuestStatusRecord;
+            if (record == null) return;
+            this.quest = Quest.GetMyName(record.questName);
+            completedObjectives = record.completedObjectives;
+        }
+        
         public Quest GetQuest() {
             return quest;
         }
@@ -27,6 +41,13 @@ namespace Outcast.Quests {
                 completedObjectives.Add(objective);
             }
             
+        }
+
+        public object CaptureState() {
+            QuestStatusRecord record = new QuestStatusRecord();
+            record.questName = quest.GetTitle();
+            record.completedObjectives = completedObjectives;
+            return record;
         }
     }
 }
