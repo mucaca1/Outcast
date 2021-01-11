@@ -27,6 +27,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: Matej
+--- !u!114 &1532739410591609720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9004551768240337548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10cf6c30ad64ed190ad670ccfe60784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statuses: []
 --- !u!114 &2339465534020903012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,25 +125,6 @@ MonoBehaviour:
     texture: {fileID: 2800000, guid: 96d4bfdb0d6d8c042bf8fccf6524d239, type: 3}
     hotspot: {x: 0, y: 0}
   maxNavMeshProjectionDistance: 1
---- !u!114 &1532739410591609720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9004551768240337548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e10cf6c30ad64ed190ad670ccfe60784, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statuses:
-  - quest: {fileID: 11400000, guid: 640d62da882a93e408288362a63f5f4a, type: 2}
-    completedObjectives: []
-  - quest: {fileID: 11400000, guid: 53a4987ea8cbff84a9163ab6af586d47, type: 2}
-    completedObjectives:
-    - a
-    - c
 --- !u!1001 &3455022202934645250
 PrefabInstance:
   m_ObjectHideFlags: 0

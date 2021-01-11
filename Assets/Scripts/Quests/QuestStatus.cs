@@ -5,8 +5,11 @@ namespace Outcast.Quests {
     [System.Serializable]
     public class QuestStatus {
         [SerializeField] private Quest quest;
-        [SerializeField] private List<string> completedObjectives;
+        [SerializeField] private List<string> completedObjectives = new List<string>();
 
+        public QuestStatus(Quest quest) {
+            this.quest = quest;
+        }
         public Quest GetQuest() {
             return quest;
         }
