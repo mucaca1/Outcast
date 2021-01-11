@@ -87,6 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1160465041343331258}
   - component: {fileID: 5937448285057964192}
+  - component: {fileID: 2047798142561875950}
   m_Layer: 0
   m_Name: Quest Panel
   m_TagString: Untagged
@@ -123,6 +124,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872205081979540509}
   m_CullTransparentMesh: 1
+--- !u!114 &2047798142561875950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872205081979540509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7b6a7fac6e2d604a8e529f6dddf65b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleKey: 113
+  uiContainer: {fileID: 89457723219476486}
 --- !u!1 &1123308750417028864
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +258,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9130383236379410741}
   m_HandleRect: {fileID: 6090263810337660560}
   m_Direction: 2
-  m_Value: 1.0000011
+  m_Value: 1.0000014
   m_Size: 0.71418333
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -442,6 +457,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8066399762599484086}
   - component: {fileID: 5624114597706451932}
+  - component: {fileID: 3700066755297682453}
   m_Layer: 0
   m_Name: Content
   m_TagString: Untagged
@@ -499,6 +515,22 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &3700066755297682453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865530403184956215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8c28bd3850448ea7650551749423f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tempQuest:
+  - {fileID: 11400000, guid: 640d62da882a93e408288362a63f5f4a, type: 2}
+  - {fileID: 11400000, guid: 53a4987ea8cbff84a9163ab6af586d47, type: 2}
+  questPrefab: {fileID: 3510731560551397346, guid: 27dc4ad2c31ae8241a4a354a6f505821, type: 3}
 --- !u!1 &2985402077321844010
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,7 +777,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1693256253833906507}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2047798142561875950}
+        m_TargetAssemblyTypeName: GameDevTV.UI.ShowHideUI, Assembly-CSharp
+        m_MethodName: Toggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &441153203933377978
 MonoBehaviour:
   m_ObjectHideFlags: 0

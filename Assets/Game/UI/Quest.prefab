@@ -145,6 +145,8 @@ GameObject:
   - component: {fileID: 127784329505802386}
   - component: {fileID: 4905665067482597709}
   - component: {fileID: 95266109986596458}
+  - component: {fileID: 7881897919843157369}
+  - component: {fileID: 3510731560551397346}
   m_Layer: 0
   m_Name: Quest
   m_TagString: Untagged
@@ -213,6 +215,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &7881897919843157369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176192156793348101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e4ea5f0a034e3e88b0bb916c00fba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipPrefab: {fileID: 404781284246886387, guid: 88d2c71f656eaae40aa087694fb3b524, type: 3}
+--- !u!114 &3510731560551397346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176192156793348101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad4395bfa77bd54a864bffa1dbb6849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 9095483985428261195}
+  progress: {fileID: 6543058288202813400}
 --- !u!1 &5962554470373514808
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +255,7 @@ GameObject:
   - component: {fileID: 9095483985428261195}
   - component: {fileID: 4442876941356726393}
   m_Layer: 0
-  m_Name: Description
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
