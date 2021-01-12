@@ -9,7 +9,8 @@ namespace Outcast.Quests {
         [SerializeField] private List<Reward> rewards = new List<Reward>();
 
         [System.Serializable]
-        class Reward {
+        public class Reward {
+            [Min(1)]
             public int number;
             public InventoryItem item;
         }
@@ -51,6 +52,10 @@ namespace Outcast.Quests {
             }
 
             return null;
+        }
+
+        public IEnumerable<Reward> GetRewards() {
+            return rewards;
         }
     }
 }

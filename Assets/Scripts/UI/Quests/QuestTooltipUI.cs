@@ -10,6 +10,7 @@ namespace Outcast.UI.Quests {
         [SerializeField] private Transform objectiveContainer;
         [SerializeField] private GameObject objectivePrefab;
         [SerializeField] private GameObject objectiveIncompletedPrefab;
+        [SerializeField] private TextMeshProUGUI rewardText;
         public void Setup(QuestStatus status) {
             title.text = status.GetQuest().GetTitle();
             objectiveContainer.DetachChildren();
@@ -21,6 +22,29 @@ namespace Outcast.UI.Quests {
                 TextMeshProUGUI text = objectiveInstance.GetComponentInChildren<TextMeshProUGUI>();
                 text.text = objective.description;
             }
-        } 
+
+            rewardText.text = GetRewardText(status.GetQuest());
+        }
+
+        private string GetRewardText(Quest quest) {
+            string text = "";
+            foreach (var reward in quest.GetRewards()) {
+                if (text != "") {
+                    text += ", ";
+                }
+
+                if (reward.number > 1) {
+                    text += reward.number + " ";
+                }
+                text += reward.item.GetDisplayName();
+            }
+
+            if (text == "") {
+                text = "No reward";
+            }
+
+            text += ".";
+            return text;
+        }
     }
 }

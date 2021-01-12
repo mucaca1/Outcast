@@ -49,5 +49,9 @@ namespace Outcast.Quests {
             record.completedObjectives = completedObjectives;
             return record;
         }
+
+        public bool IsComplete() {
+            return true;
+        }
     }
 }
