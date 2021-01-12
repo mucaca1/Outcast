@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using GameDevTV.Inventories;
 using GameDevTV.Saving;
+using Outcast.Core;
 using UnityEngine;
 
 namespace Outcast.Quests {
     
-    public class QuestList : MonoBehaviour, ISaveable {
+    public class QuestList : MonoBehaviour, ISaveable, IPredicateEvaluator {
         [SerializeField] private List<QuestStatus> statuses = new List<QuestStatus>();
 
         public event Action ONUpdate;
@@ -72,6 +74,17 @@ namespace Outcast.Quests {
             foreach (object objectState in stateList) {
                 statuses.Add(new QuestStatus(objectState));
             }
+        }
+
+        public bool? Evaluate(string predicate, string[] parameters) {
+            switch (predicate) {
+                case "HasQuest":
+                    return HasQuest(Quest.GetMyName(parameters[0]));
+                case "CompleteQuest":
+                    return GetQuestStatus(Quest.GetMyName(parameters[0])).IsComplete();
+            }
+
+            return null;
         }
     }
 }

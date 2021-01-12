@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Outcast.Core;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -15,6 +16,7 @@ namespace Dialogue {
 
         [SerializeField] private string onEnterAction;
         [SerializeField] private string onExitAction;
+        [SerializeField] private Condition condition;
 
         public string GetText() {
             return text;
@@ -80,5 +82,8 @@ namespace Dialogue {
             EditorUtility.SetDirty(this);
         }
 #endif
+        public bool ChceckCondition(IEnumerable<IPredicateEvaluator> evaluators) {
+            return condition.Check(evaluators);
+        }
     }
 }

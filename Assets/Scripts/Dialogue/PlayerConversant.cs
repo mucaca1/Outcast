@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Control;
+using Outcast.Core;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -58,7 +59,7 @@ namespace Dialogue {
         }
 
         public void Next() {
-            int numPlayerResponsies = _currentDialogue.GetPlayerChildren(_currentNode).Count();
+            int numPlayerResponsies = FilterOnCondition(_currentDialogue.GetPlayerChildren(_currentNode)).Count();
             if (numPlayerResponsies > 0) {
                 _isChoosing = true;
                 TriggerExitAction();
@@ -66,7 +67,7 @@ namespace Dialogue {
                 return;
             }
 
-            DialogueNode[] nodes = _currentDialogue.GetAIChildren(_currentNode).ToArray();
+            DialogueNode[] nodes = FilterOnCondition(_currentDialogue.GetAIChildren(_currentNode)).ToArray();
             if (nodes.Length != 0) {
                 int randomIndex = Random.Range(0, nodes.Length);
                 TriggerExitAction();
@@ -78,11 +79,11 @@ namespace Dialogue {
         }
 
         public IEnumerable<DialogueNode> GetChoices() {
-            return _currentDialogue.GetPlayerChildren(_currentNode);
+            return FilterOnCondition(_currentDialogue.GetPlayerChildren(_currentNode));
         }
 
         public bool HasNext() {
-            return _currentDialogue.GetAllChildren(_currentNode).Count() > 0;
+            return FilterOnCondition(_currentDialogue.GetAllChildren(_currentNode)).Count() > 0;
         }
 
         private void TriggerEnterAction() {
@@ -111,6 +112,18 @@ namespace Dialogue {
             }
 
             return currentConversant.GetName();
+        }
+        
+        private IEnumerable<DialogueNode> FilterOnCondition(IEnumerable<DialogueNode> inputNode) {
+            foreach (var node in inputNode) {
+                if (node.ChceckCondition(GetEvaluators())) {
+                    yield return node;
+                }
+            }
+        }
+
+        private IEnumerable<IPredicateEvaluator> GetEvaluators() {
+            return GetComponents<IPredicateEvaluator>();
         }
     }
 }
