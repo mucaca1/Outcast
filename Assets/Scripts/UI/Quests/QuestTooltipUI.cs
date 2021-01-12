@@ -13,13 +13,13 @@ namespace Outcast.UI.Quests {
         public void Setup(QuestStatus status) {
             title.text = status.GetQuest().GetTitle();
             objectiveContainer.DetachChildren();
-            foreach (string objective in status.GetQuest().GetObjectives()) {
-                GameObject prefab = status.IsObjectiveComplete(objective)
+            foreach (Quest.Objective objective in status.GetQuest().GetObjectives()) {
+                GameObject prefab = status.IsObjectiveComplete(objective.reference)
                     ? objectivePrefab
                     : objectiveIncompletedPrefab;
                 GameObject objectiveInstance = Instantiate(prefab, objectiveContainer);
                 TextMeshProUGUI text = objectiveInstance.GetComponentInChildren<TextMeshProUGUI>();
-                text.text = objective;
+                text.text = objective.description;
             }
         } 
     }

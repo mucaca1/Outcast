@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: Find the missing sock
   m_EditorClassIdentifier: 
   objectives:
-  - a
-  - b
-  - c
+  - reference: a
+    description: Go irritate the guard
+  - reference: b
+    description: Visit pharma
+  rewards:
+  - number: 1
+    item: {fileID: 11400000, guid: dea4573eed6bb3249bac598d926ccc9d, type: 2}
