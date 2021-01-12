@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Outcast.Quests {
@@ -51,6 +52,12 @@ namespace Outcast.Quests {
         }
 
         public bool IsComplete() {
+            foreach (var objective in quest.GetObjectives()) {
+                if (!completedObjectives.Contains(objective.reference)) {
+                    return false;
+                }
+            }
+
             return true;
         }
     }
