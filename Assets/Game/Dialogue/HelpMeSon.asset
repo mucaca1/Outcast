@@ -1,0 +1,240 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5924305516501009989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b74b59577ec4fbba811bc8057fad9a4, type: 3}
+  m_Name: 1322c2ec-580e-4fb6-ac1e-607a80eefb44
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  text: Uppps i dont need this
+  children:
+  - e63027ba-8b76-4119-a773-fac8308477e6
+  rect:
+    serializedVersion: 2
+    x: 402
+    y: 382
+    width: 200
+    height: 130
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    predicate: HasQuest
+    parameters:
+    - Find the missing sock
+--- !u!114 &-4680510423330929474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b74b59577ec4fbba811bc8057fad9a4, type: 3}
+  m_Name: 084d808e-b3a3-4b1e-b13e-4832d1ab1232
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  text: Sure, what do you need.
+  children:
+  - c56b0d36-3600-4851-b70c-b3aca10cedc5
+  rect:
+    serializedVersion: 2
+    x: 399
+    y: 197
+    width: 200
+    height: 130
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    predicate: 
+    parameters: []
+--- !u!114 &-895702594348615498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b74b59577ec4fbba811bc8057fad9a4, type: 3}
+  m_Name: 27f272dc-1d6f-4750-936a-2ccda2045bd4
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  text: Do I look like a doctor?
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 399
+    y: 50
+    width: 200
+    height: 130
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    predicate: 
+    parameters: []
+--- !u!114 &-653027698447155077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b74b59577ec4fbba811bc8057fad9a4, type: 3}
+  m_Name: 16e34976-f187-41a8-91d8-0c5a0cce5e5a
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  text: I have sword
+  children:
+  - 4c2f4448-cb8b-4001-88e1-993b86f5e0b7
+  rect:
+    serializedVersion: 2
+    x: 413
+    y: 526
+    width: 200
+    height: 130
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    predicate: HasInventoryItem
+    parameters:
+    - 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2367f1d3d894c93a2b63a4cd8ca9c93, type: 3}
+  m_Name: HelpMeSon
+  m_EditorClassIdentifier: 
+  _nodes:
+  - {fileID: 4650731652828727523}
+  - {fileID: -895702594348615498}
+  - {fileID: -4680510423330929474}
+  - {fileID: 1672222988227543245}
+  - {fileID: -5924305516501009989}
+  - {fileID: 7758773834359084280}
+  - {fileID: -653027698447155077}
+  - {fileID: 6180781535250777799}
+--- !u!114 &1672222988227543245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b74b59577ec4fbba811bc8057fad9a4, type: 3}
+  m_Name: c56b0d36-3600-4851-b70c-b3aca10cedc5
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  text: Arrr.
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 609
+    y: 197
+    width: 200
+    height: 130
+  onEnterAction: 
+  onExitAction: GiveQuest
+  condition:
+    predicate: 
+    parameters: []
+--- !u!114 &4650731652828727523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b74b59577ec4fbba811bc8057fad9a4, type: 3}
+  m_Name: 9a370130-b1c2-4bbf-aa04-f3054c4dfbe5
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  text: I neeed help!
+  children:
+  - 27f272dc-1d6f-4750-936a-2ccda2045bd4
+  - 084d808e-b3a3-4b1e-b13e-4832d1ab1232
+  - 1322c2ec-580e-4fb6-ac1e-607a80eefb44
+  - 16e34976-f187-41a8-91d8-0c5a0cce5e5a
+  rect:
+    serializedVersion: 2
+    x: 99
+    y: 50
+    width: 200
+    height: 130
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    predicate: 
+    parameters: []
+--- !u!114 &6180781535250777799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b74b59577ec4fbba811bc8057fad9a4, type: 3}
+  m_Name: 4c2f4448-cb8b-4001-88e1-993b86f5e0b7
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  text: Olalaaaa
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 623
+    y: 526
+    width: 200
+    height: 130
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    predicate: 
+    parameters: []
+--- !u!114 &7758773834359084280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b74b59577ec4fbba811bc8057fad9a4, type: 3}
+  m_Name: e63027ba-8b76-4119-a773-fac8308477e6
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  text: Bad memory
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 612
+    y: 382
+    width: 200
+    height: 130
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    predicate: 
+    parameters: []
