@@ -5,6 +5,7 @@
         Combat,
         UI,
         Pickup,
-        FullPickup
+        FullPickup,
+        Dialogue
     }
 }

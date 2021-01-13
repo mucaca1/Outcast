@@ -18,10 +18,13 @@ namespace GameDevTV.UI
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(toggleKey))
-            {
-                uiContainer.SetActive(!uiContainer.activeSelf);
+            if (Input.GetKeyDown(toggleKey)) {
+                Toggle();
             }
+        }
+
+        public void Toggle() {
+            uiContainer.SetActive(!uiContainer.activeSelf);
         }
     }
 }

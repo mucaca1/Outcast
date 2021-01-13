@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Outcast.Core;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,6 +13,10 @@ namespace Dialogue {
         [SerializeField] private List<string> children = new List<string>();
 
         [SerializeField] private Rect rect = new Rect(100, 50, 200, 130);
+
+        [SerializeField] private string onEnterAction;
+        [SerializeField] private string onExitAction;
+        [SerializeField] private Condition condition;
 
         public string GetText() {
             return text;
@@ -27,6 +32,14 @@ namespace Dialogue {
 
         public bool IsPlayerSpeaking() {
             return isPlayerSpeaking;
+        }
+
+        public string GetOnEnterAction() {
+            return onEnterAction;
+        }
+        
+        public string GetOnExitAction() {
+            return onExitAction;
         }
 
 #if UNITY_EDITOR
@@ -69,5 +82,8 @@ namespace Dialogue {
             EditorUtility.SetDirty(this);
         }
 #endif
+        public bool ChceckCondition(IEnumerable<IPredicateEvaluator> evaluators) {
+            return condition.Check(evaluators);
+        }
     }
 }

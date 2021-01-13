@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2367f1d3d894c93a2b63a4cd8ca9c93, type: 3}
-  m_Name: New Dialogue
+  m_Script: {fileID: 11500000, guid: 6e162f9a9c0a4accae6541f600f0024c, type: 3}
+  m_Name: Find my hat
   m_EditorClassIdentifier: 
-  _nodes:
-  - {fileID: 0}
+  objectives:
+  - Go over river
